@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">RecyclingApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="mon">월요일</string>
+    <string name="tue">화요일</string>
+    <string name="wed">수요일</string>
+    <string name="thu">목요일</string>
+    <string name="fri">금요일</string>
+    <string name="sat">토요일</string>
+    <string name="sun">일요일</string>
+
+    <string name="input_nickname_guide">[어플명] 에서 사용할\n닉네임을 입력해주세요.</string>
+    <string name="input_zone_guide">거주하고 있는\n지역구를 선택해주세요.</string>
+    <string name="input_day_guide">재활용 쓰레기를\n버리는 요일을 선택해주세요.</string>
+    <string name="finish_guide">가입이 완료되었습니다!</string>
+
+    <string name="menu1_title">검색</string>
+    <string name="menu2_title">환경리포트</string>
+    <string name="menu3_title">FAQ</string>
+    <string name="menu4_title">찾기</string>
+
+    <string name="menu1_sub_title">헷갈리는 분리수거 방법\n사진찍어서 찾아봐요!</string>
+    <string name="menu2_sub_title">이번주 나의\n녹색생활 실천현황은?</string>
+    <string name="menu3_sub_title">자주 묻는 질문들을\n확인해보세요!</string>
+    <string name="menu4_sub_title">내 주변 탄소중립포인트\n사용처를 확인해보세요!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

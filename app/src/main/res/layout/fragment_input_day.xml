@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentInputDay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textGuide"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/input_day_guide"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textFontWeight="600"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <TextView
+        android:id="@+id/textGuideSub"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="다중 선택 가능"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGuide"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:backgroundTint="#A6A6A6"
+        android:text="다음"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.6"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGuideSub">
+
+        <CheckBox
+            android:id="@+id/checkBoxMon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:text="@string/mon" />
+
+        <CheckBox
+            android:id="@+id/checkBoxTue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:text="@string/tue" />
+
+        <CheckBox
+            android:id="@+id/checkBoxWed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:text="@string/wed" />
+
+        <CheckBox
+            android:id="@+id/checkBoxThu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:text="@string/thu" />
+
+        <CheckBox
+            android:id="@+id/checkBoxFri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:text="@string/fri" />
+
+        <CheckBox
+            android:id="@+id/checkBoxSat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:text="@string/sat" />
+
+        <CheckBox
+            android:id="@+id/checkBoxSun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:text="@string/sun" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
