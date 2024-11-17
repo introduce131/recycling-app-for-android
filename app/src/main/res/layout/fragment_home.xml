@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".HomeFragment">
 
     <!--무료 icon 사이트 : https://material.io/resources/icons -->
     <!--ripple effect 주는법 : android:foreground="?android:attr/selectableItemBackground"-->
@@ -256,7 +256,7 @@
 
             <!--찾기-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item_card_point_where"
+                android:id="@+id/item_card_point_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
