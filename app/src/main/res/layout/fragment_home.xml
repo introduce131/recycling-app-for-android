@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <!--무료 icon 사이트 : https://material.io/resources/icons -->
+    <!--ripple effect 주는법 : android:foreground="?android:attr/selectableItemBackground"-->
     <TextView
         android:id="@+id/textViewIntro"
         android:layout_width="0dp"
@@ -13,26 +15,31 @@
         android:background="@drawable/text_view_border"
         android:padding="20dp"
         android:text="닉네임님\n금요일은 재활용쓰레기\n버리는 날이에요!"
+        android:textColor="@color/black"
         android:textSize="23dp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.211"
+        app:layout_constraintVertical_bias="0.135"
         app:layout_constraintWidth_percent="0.85" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:orientation="vertical"
-        app:layout_constraintWidth_percent="0.85"
+        android:paddingTop="4dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewIntro"
-        app:layout_constraintVertical_bias="0.12">
+        app:layout_constraintVertical_bias="0.22000003"
+        app:layout_constraintWidth_percent="0.85">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,12 +49,16 @@
 
             <!--검색-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item_card1"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#DDDDDD"
+                android:id="@+id/item_card_camera"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:text="Button" >
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="Button">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -97,12 +108,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+            <!--개판이네 GridLayout 쓸걸.. 이거 중간에 공백 넣으려고 쓰는 그냥 의미없는 View -->
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
             <!--환경리포트-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item_card2"
+                android:id="@+id/item_card_report"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#DDDDDD"
                 android:text="Button">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,10 +144,10 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.25"
+                        app:layout_constraintHorizontal_bias="0.2"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.141" />
+                        app:layout_constraintVertical_bias="0.1" />
 
                     <TextView
                         android:id="@+id/textViewSubTitle2"
@@ -136,16 +157,16 @@
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.42"
+                        app:layout_constraintHorizontal_bias="0.277"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewTitle2"
-                        app:layout_constraintVertical_bias="0.101" />
+                        app:layout_constraintVertical_bias="0.085" />
 
                     <ImageView
                         android:id="@+id/menu_icon2"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/ic_menu_camera"
+                        android:src="@drawable/ic_content_paste"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.92"
@@ -154,6 +175,11 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+
+        <!--개판이네 GridLayout 쓸걸.. 이거 중간에 공백 넣으려고 쓰는 그냥 의미없는 View -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
         <!--2번째 줄-->
         <LinearLayout
@@ -164,12 +190,16 @@
 
             <!--FAQ-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item_card3"
+                android:id="@+id/item_card_faq"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:text="Button" >
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#DDDDDD"
+                android:text="Button">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -210,7 +240,7 @@
                         android:id="@+id/menu_icon3"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/ic_menu_camera"
+                        android:src="@drawable/ic_question_answer"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.92"
@@ -219,12 +249,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+            <!--개판이네 GridLayout 쓸걸.. 이거 중간에 공백 넣으려고 쓰는 그냥 의미없는 View -->
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
             <!--찾기-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item_card4"
+                android:id="@+id/item_card_point_where"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#DDDDDD"
                 android:text="Button">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -267,7 +307,7 @@
                         android:id="@+id/menu_icon4"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/ic_menu_camera"
+                        android:src="@drawable/ic_explore"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.92"
