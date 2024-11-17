@@ -26,6 +26,7 @@
         app:layout_constraintVertical_bias="0.135"
         app:layout_constraintWidth_percent="0.85" />
 
+    <!-- 메뉴 4개임 -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="300dp"
@@ -131,9 +132,6 @@
                     android:layout_height="match_parent">
 
                     <!--메뉴 이름-->
-
-                    <!--메뉴 아이콘-->
-
                     <TextView
                         android:id="@+id/textViewTitle2"
                         android:layout_width="wrap_content"
@@ -149,6 +147,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.1" />
 
+                    <!--메뉴 설명-->
                     <TextView
                         android:id="@+id/textViewSubTitle2"
                         android:layout_width="wrap_content"
@@ -162,6 +161,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textViewTitle2"
                         app:layout_constraintVertical_bias="0.085" />
 
+                    <!--메뉴 아이콘-->
                     <ImageView
                         android:id="@+id/menu_icon2"
                         android:layout_width="35dp"
@@ -272,9 +272,6 @@
                     android:layout_height="match_parent">
 
                     <!--메뉴 이름-->
-
-                    <!--메뉴 아이콘-->
-
                     <TextView
                         android:id="@+id/textViewTitle4"
                         android:layout_width="wrap_content"
@@ -290,6 +287,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.1" />
 
+                    <!--메뉴 설명-->
                     <TextView
                         android:id="@+id/textViewSubTitle4"
                         android:layout_width="wrap_content"
@@ -303,6 +301,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textViewTitle4"
                         app:layout_constraintVertical_bias="0.101" />
 
+                    <!--메뉴 아이콘-->
                     <ImageView
                         android:id="@+id/menu_icon4"
                         android:layout_width="35dp"

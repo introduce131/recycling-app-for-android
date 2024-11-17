@@ -5,21 +5,38 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
+    <!--Home-->
     <fragment
         android:id="@+id/nav_home"
         android:name="com.loveprofessor.recyclingapp.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
+    <!--Camera 촬영-->
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.loveprofessor.recyclingapp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_camera"
+        android:name="com.loveprofessor.recyclingapp.CameraFragment"
+        android:label="@string/menu_camera"
+        tools:layout="@layout/fragment_camera" />
 
+    <!--환경 리포트-->
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.loveprofessor.recyclingapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_report"
+        android:name="com.loveprofessor.recyclingapp.ReportFragment"
+        android:label="@string/menu_report"
+        tools:layout="@layout/fragment_report" />
+
+    <!--FAQ-->
+    <fragment
+        android:id="@+id/nav_Faq"
+        android:name="com.loveprofessor.recyclingapp.FaqFragment"
+        android:label="@string/menu_faq"
+        tools:layout="@layout/fragment_faq" />
+
+    <!--찾기-->
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.loveprofessor.recyclingapp.SearchFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>
