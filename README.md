@@ -10,3 +10,7 @@
    ```
    <string name="client_id">여기</string>
    ```
+7. Sync를 일단 한다
+8. Build > Clean Project를 한다
+9. Build > Rebuild Project를 한다
+10. 그리고 실행을 하고 Runtime error 나면 카톡으로 물어보세요
