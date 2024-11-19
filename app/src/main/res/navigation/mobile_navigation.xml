@@ -10,14 +10,43 @@
         android:id="@+id/nav_home"
         android:name="com.loveprofessor.recyclingapp.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <!--Home -> Camera로 이동-->
+        <action android:id="@+id/action_home_to_camera"
+                app:destination="@+id/nav_camera" />
+    </fragment>
 
     <!--Camera 촬영-->
     <fragment
         android:id="@+id/nav_camera"
         android:name="com.loveprofessor.recyclingapp.CameraFragment"
         android:label="@string/menu_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera">
+
+        <!--Camera -> Camera_home 으로 이동-->
+        <action android:id="@+id/action_camera_to_camera_home"
+                app:destination="@+id/nav_camera_home"/>
+    </fragment>
+
+    <!--찾기-->
+    <fragment
+        android:id="@+id/nav_camera_home"
+        android:name="com.loveprofessor.recyclingapp.CameraHomeFragment"
+        android:label="@string/menu_camera_home"
+        tools:layout="@layout/fragment_camera_home">
+
+        <!--Camera_Home -> Camera_Result 으로 이동-->
+        <action android:id="@+id/action_camera_home_to_camera_result"
+                app:destination="@+id/nav_camera_result"/>
+    </fragment>
+
+    <!--Camera 결과화면-->
+    <fragment
+        android:id="@+id/nav_camera_result"
+        android:name="com.loveprofessor.recyclingapp.CameraResultFragment"
+        android:label="@string/menu_camera_result"
+        tools:layout="@layout/fragment_camera_result" />
 
     <!--환경 리포트-->
     <fragment

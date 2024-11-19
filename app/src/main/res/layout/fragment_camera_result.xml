@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_CameraResult"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="36dp"
+                android:text="분류 결과"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="종이류"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageView
+                android:id="@+id/recycleImageView"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="centerCrop"
+                android:background="#F7CBFF"
+                android:contentDescription="재활용품 사진"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCategory" />
+
+            <!-- 배출 방법 Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="배출 방법"
+                android:textSize="16sp"
+                android:textAlignment="center"/>
+
+            <!-- 배출 방법 -->
+            <TextView
+                android:id="@+id/textViewHowToRecycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="50dp"
+                android:textAlignment="textStart"
+                android:text=" - 잡지, 책자, 노트는 스테이플러 철심을 제거한 후 배출해주세요.\n- 종이 상자는 테이프와 스티커를 제거하고 배출해주세요.\n- 코팅된 종이(영수증, 테트라팩)는 일반쓰레기로 처리해주세요.\n- 종이팩(우유팩, 주스팩 등)은 깨끗이 씻어 별도로 분리 배출해주세요.\n- 신문지는 1면을 반으로 접어서 일정량을+자 모양으로 묶어 배출해주세요.\n" />
+
+            <!-- 재활용이 가능한 품목 Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="재활용이 가능한 품목은 다음과 같아요."
+                android:textSize="16sp"
+                android:textAlignment="center"/>
+
+            <!-- 재활용이 가능한 품목 -->
+            <TextView
+                android:id="@+id/textViewRecycleUnable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="50dp"
+                android:textAlignment="center"
+                android:text="신문지, 책, 종이상자류, 달력, 포장지, 우유팩 등" />
+
+            <!-- 재활용이 불가능한 품목 Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="아래 품목들은 재활용이 불가능해요."
+                android:textSize="16sp"
+                android:textAlignment="center"/>
+
+            <!-- 재활용이 불가능한 품목 -->
+            <TextView
+                android:id="@+id/textViewRecycleEnable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="50dp"
+                android:textAlignment="center"
+                android:text="비닐코팅된 종이류, 테이프, 스프링 등 이물질이 함께 붙어있는 책자 등" />
+
+            <!-- 재활용품인 척하는 쓰레기 Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="재활용품인 척하는 쓰레기"
+                android:textSize="16sp"
+                android:textAlignment="center"/>
+
+            <!-- 재활용이 가능한 품목 -->
+            <TextView
+                android:id="@+id/textViewRecycleFake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="50dp"
+                android:textAlignment="center"
+                android:text="영수증, 금박지, 은박지, 다른 재질이 혼합된 벽지 등" />
+
+            <!--마지막 가이드 라인-->
+            <TextView
+                android:id="@+id/textViewCaution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:gravity="center"
+                android:text="지역마다 수거 방법이나 분리배출 규정이 조금씩 다를 수 있으니, 자치단체나 재활용 가이드라인에 따라 정확한 방법을 따르는 것이 좋습니다"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycleImageView" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="303dp"
+                android:layout_height="53dp"
+                android:layout_gravity="center"
+                android:text="완료"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintVertical_bias="0.245" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

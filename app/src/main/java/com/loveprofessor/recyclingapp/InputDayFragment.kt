@@ -17,6 +17,7 @@ import com.loveprofessor.recyclingapp.databinding.FragmentInputDayBinding
 
 /* fireStore에 저장할 userData 형식 */
 data class UserData (
+    var userUid:String = "",
     var userEmail:String = "",
     var userName:String = "",
     var userNickname:String = "",
@@ -75,6 +76,7 @@ class InputDayFragment : Fragment() {
             MyApplication.userGarbageday = result
 
             var userData = UserData(
+                userUid = MyApplication.uId,
                 userEmail = MyApplication.userEmail,
                 userName = MyApplication.userName,
                 userNickname = MyApplication.userNickname,

@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.loveprofessor.recyclingapp.MyApplication
 import com.loveprofessor.recyclingapp.databinding.FragmentHomeBinding
 import java.time.LocalDate
@@ -49,19 +51,23 @@ class HomeFragment : Fragment() {
 
             // 이제 오늘 날짜랑 쓰레기버리는 날짜랑 비교하면 됨
             for(day in days) {
-                if(day == today) introText = "${MyApplication.userNickname}님 안녕하세요!\n${today}은 재활용쓰레기\n버리는 날이에요."
-                else introText = "${MyApplication.userNickname}님 안녕하세요!\n오늘도 좋은 하루 되세요!"
+                if(day == today) {
+                    introText = "${MyApplication.userNickname}님 안녕하세요!\n${today}은 재활용쓰레기\n버리는 날이에요."
+                    break;      // 일치하면 loop 빠져나오기
+                }
+                else {
+                    introText = "${MyApplication.userNickname}님 안녕하세요!\n오늘도 좋은 하루 되세요!"
+                }
             }
         }
 
         textViewIntro.text = introText  // 그리고 이제 ViewIntro에 텍스트를 표시
 
-        // '검색' 메뉴 클릭 시 이벤트 (카메라 촬영)
+        // '검색' 메뉴 클릭 시 navController를 통해 Home->CameraFragment로 이동
+        // https://velog.io/@leeyjwinter/Navigation%EC%97%90-action-%EC%B6%94%EA%B0%80
         menuCamera.setOnClickListener {
-
+            findNavController().navigate(R.id.action_home_to_camera)
         }
-
-
         return binding.root
     }
 
