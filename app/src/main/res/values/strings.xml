@@ -40,6 +40,8 @@
     <string name="menu3_sub_title">자주 묻는 질문들을\n확인해보세요!</string>
     <string name="menu4_sub_title">내 주변 탄소중립포인트\n사용처를 확인해보세요!</string>
 
+    <string name="separate_guide">지역마다 수거 방법이나 분리배출 규정이 조금씩 다를 수 있으니, 자치단체나 재활용 가이드라인에 따라 정확한 방법을 따르는 것이 좋습니다</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
