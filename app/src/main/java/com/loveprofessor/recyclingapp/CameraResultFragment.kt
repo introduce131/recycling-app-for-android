@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.ParcelCompat
 import androidx.core.text.HtmlCompat
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -162,9 +163,11 @@ class CameraResultFragment : Fragment() {
                 .set(classifyResultData)
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "데이터가 정상적으로 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()  // 프래그먼트 뒤로가기
                 }.addOnFailureListener {
                     Toast.makeText(requireContext(), "데이터 저장 중 에러가 발생 했습니다.", Toast.LENGTH_SHORT).show()
                     Log.d("FireStore", it.message.toString())
+                    findNavController().popBackStack()  // 프래그먼트 뒤로가기
                 }
         } // end of fun
 
@@ -203,11 +206,12 @@ class CameraResultFragment : Fragment() {
                 if(taskSnapShot.isSuccessful) {
                     // 업로드에 성공 후, Download URL을 가져옴
                     imgRef.downloadUrl.addOnSuccessListener { uri ->
-                        imgURL = uri.toString() /* <-- 여기서 imgURL을 저장하는 것임. */
-                        Log.d("Storage", "URL:$imgURL")
+                        if(isAdded) {
+                            imgURL = uri.toString() /* <-- 여기서 imgURL을 저장하는 것임. */
+                            Log.d("Storage", "URL:$imgURL")
 
-                        insertFireStore(imgURL)
-
+                            insertFireStore(imgURL)
+                        }
                     }.addOnFailureListener{ exception ->
                         // url 다운로드 실패
                         Log.d("Storage", "Download URL Failed : ${exception.message}")

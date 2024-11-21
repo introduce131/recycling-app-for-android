@@ -24,8 +24,6 @@
     <string name="sat">토요일</string>
     <string name="sun">일요일</string>
 
-    <string name="client_id">25057406424-ch45tjcqq3d3odg9640s9p53qak1n451.apps.googleusercontent.com</string>
-
     <string name="input_nickname_guide">[어플명] 에서 사용할\n닉네임을 입력해주세요.</string>
     <string name="input_zone_guide">거주하고 있는\n지역구를 선택해주세요.</string>
     <string name="input_day_guide">재활용 쓰레기를\n버리는 요일을 선택해주세요.</string>
@@ -45,6 +43,7 @@
     <string name="camera_searchList">이전 검색 목록에서 보기</string>
 
     <string name="camera_list_title">이전 검색 List</string>
+    <string name="camera_list_delete"><u>검색기록 전체 삭제</u></string>
 
     <string name="separate_guide">지역마다 수거 방법이나 분리배출 규정이 조금씩 다를 수 있으니, 자치단체나 재활용 가이드라인에 따라 정확한 방법을 따르는 것이 좋습니다</string>
 

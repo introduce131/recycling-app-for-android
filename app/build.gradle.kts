@@ -57,6 +57,9 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.13.2")
     annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
 
+    /* Custom Dialog */
+    implementation("com.github.f0ris.sweetalert:library:1.5.6")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
