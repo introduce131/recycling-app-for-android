@@ -43,15 +43,19 @@ android {
 }
 
 dependencies {
-    /* firebase auth */
+    /* firebase auth 의존성 추가 */
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.1.0")
 
-    /* fireStore, storage */
+    /* fireStore, storage 의존성 추가 */
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.0")
     implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
+
+    /* Glide 의존성 추가 */
+    implementation("com.github.bumptech.glide:glide:4.13.2")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

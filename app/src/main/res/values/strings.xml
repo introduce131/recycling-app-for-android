@@ -14,6 +14,7 @@
     <string name="menu_search">Search</string>
     <string name="menu_camera_home">Camera Home</string>
     <string name="menu_camera_result">Camera Result</string>
+    <string name="menu_camera_list">Camera List</string>
 
     <string name="mon">월요일</string>
     <string name="tue">화요일</string>
@@ -22,6 +23,8 @@
     <string name="fri">금요일</string>
     <string name="sat">토요일</string>
     <string name="sun">일요일</string>
+
+    <string name="client_id">25057406424-ch45tjcqq3d3odg9640s9p53qak1n451.apps.googleusercontent.com</string>
 
     <string name="input_nickname_guide">[어플명] 에서 사용할\n닉네임을 입력해주세요.</string>
     <string name="input_zone_guide">거주하고 있는\n지역구를 선택해주세요.</string>
@@ -37,6 +40,11 @@
     <string name="menu2_sub_title">이번주 나의\n녹색생활 실천현황은?</string>
     <string name="menu3_sub_title">자주 묻는 질문들을\n확인해보세요!</string>
     <string name="menu4_sub_title">내 주변 탄소중립포인트\n사용처를 확인해보세요!</string>
+
+    <string name="camera_photograph">사진 찍어서 찾기</string>
+    <string name="camera_searchList">이전 검색 목록에서 보기</string>
+
+    <string name="camera_list_title">이전 검색 List</string>
 
     <string name="separate_guide">지역마다 수거 방법이나 분리배출 규정이 조금씩 다를 수 있으니, 자치단체나 재활용 가이드라인에 따라 정확한 방법을 따르는 것이 좋습니다</string>
 

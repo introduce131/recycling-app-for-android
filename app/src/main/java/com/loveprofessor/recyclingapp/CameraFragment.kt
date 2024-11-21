@@ -28,7 +28,7 @@ class CameraFragment : Fragment() {
             .setPopEnterAnim(R.anim.anim_slide_in_from_right_fade_in)
             .build()
 
-        // Camera Fragment에서 CameraHome Fragment로 이동
+        // CameraHome Fragment -> CameraList Fragment 이동
         findNavController().navigate(R.id.action_camera_to_camera_home, null, navOptions)
 
         return binding.root

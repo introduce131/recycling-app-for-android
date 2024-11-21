@@ -39,6 +39,10 @@
         <!--Camera_Home -> Camera_Result 으로 이동-->
         <action android:id="@+id/action_camera_home_to_camera_result"
                 app:destination="@+id/nav_camera_result"/>
+
+        <!--Camera_Home -> Camera_List 으로 이동-->
+        <action android:id="@+id/action_camera_home_to_camera_list"
+            app:destination="@+id/nav_camera_list"/>
     </fragment>
 
     <!--Camera 결과화면-->
@@ -47,6 +51,13 @@
         android:name="com.loveprofessor.recyclingapp.CameraResultFragment"
         android:label="@string/menu_camera_result"
         tools:layout="@layout/fragment_camera_result" />
+
+    <!--Camera 결과 목록 화면-->
+    <fragment
+        android:id="@+id/nav_camera_list"
+        android:name="com.loveprofessor.recyclingapp.CameraListFragment"
+        android:label="@string/menu_camera_list"
+        tools:layout="@layout/fragment_camera_list" />
 
     <!--환경 리포트-->
     <fragment

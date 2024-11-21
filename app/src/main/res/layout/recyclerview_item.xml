@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_margin="10dp">
+
+    <!--일단은 ImageView-->
+    <ImageView
+        android:id="@+id/rv_image"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/avatars" />
+
+    <!--텍스트뷰 2개를 감쌀 LinearLayout-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+        <!--카테고리 (제목)-->
+        <TextView
+            android:id="@+id/rv_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="플라스틱류"/>
+
+        <!--카테고리 (업로드 날짜)-->
+        <TextView
+            android:id="@+id/rv_uploadDt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="2024-11-21 10:09"/>
+    </LinearLayout>
+</LinearLayout>

@@ -23,12 +23,16 @@ import com.loveprofessor.recyclingapp.databinding.FragmentCameraResultBinding
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
+
+// data Class ClassifyResultData
 data class ClassifyResultData (
     var userUid:String = "",
     var imageURL:String = "",
     var category:String = "",
+    var uploadDt:String = ""
 )
 
 class CameraResultFragment : Fragment() {
@@ -139,11 +143,16 @@ class CameraResultFragment : Fragment() {
         // imgURL을 받고 FireStore에 저장하는 함수임.
         // imgURL을 저장하는 부분이 비동기적으로 처리되기 때문에 함수로 묶어서 addOnSuccessListener 안에 던져 놔야 해결될 듯
         fun insertFireStore(imgURL: String?) {
+            // 먼저 업로드 날짜(를 여기에서 구해야 함
+            val sdf = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
+            val date = sdf.format(System.currentTimeMillis())
+
             // FireStore에 데이터를 저장할 준비를 함, data class ClassifyResultData는 위에 선언되어 있음
             var classifyResultData = ClassifyResultData (
                 userUid = MyApplication.uId,    // 로그인된 사용자의 고유 ID
-                imageURL = imgURL ?: "",              // 아까 업로드 성공하고 받아온 url
-                category = category ?: ""  // category임 plastic-bottle 같은 거, FireStore의 collection(recycle_howto)와 맵핑되어 있음
+                imageURL = imgURL ?: "",        // 아까 업로드 성공하고 받아온 url
+                category = category ?: "",      // category임 plastic-bottle 같은 거, FireStore의 collection(recycle_howto)와 맵핑되어 있음
+                uploadDt = date ?: ""           // 업로드 날짜 (yyyyMMddHHmmss, 년월일시분초)
             )
 
             // 이제 FireStore에 올리는 작업을 진행함
