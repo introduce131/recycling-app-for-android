@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.loveprofessor.recyclingapp"
-        minSdk = 26
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -59,6 +59,9 @@ dependencies {
 
     /* Custom Dialog */
     implementation("com.github.f0ris.sweetalert:library:1.5.6")
+
+    /* MPAndroidChart */
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

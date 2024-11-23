@@ -7,11 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- ScrollView를 ConstraintLayout 안에 추가 -->
+    <!--하위 프래그먼트를 담을 FrameLayout-->
     <FrameLayout
         android:id="@+id/camera_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="parent"
-        tools:context=".CameraFragment"/>
+        tools:context=".camera.CameraFragment"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

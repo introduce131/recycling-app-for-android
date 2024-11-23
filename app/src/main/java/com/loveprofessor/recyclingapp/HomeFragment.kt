@@ -68,6 +68,10 @@ class HomeFragment : Fragment() {
         menuCamera.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_camera)
         }
+
+        menuReport.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_report)
+        }
         return binding.root
     }
 

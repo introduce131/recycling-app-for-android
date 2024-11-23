@@ -15,12 +15,15 @@
         <!--Home -> Camera로 이동-->
         <action android:id="@+id/action_home_to_camera"
                 app:destination="@+id/nav_camera" />
+        <!--Home -> 환경리포트로 이동-->
+        <action android:id="@+id/action_home_to_report"
+            app:destination="@+id/nav_report" />
     </fragment>
 
     <!--Camera 촬영-->
     <fragment
         android:id="@+id/nav_camera"
-        android:name="com.loveprofessor.recyclingapp.CameraFragment"
+        android:name="com.loveprofessor.recyclingapp.camera.CameraFragment"
         android:label="@string/menu_camera"
         tools:layout="@layout/fragment_camera">
 
@@ -32,7 +35,7 @@
     <!--찾기-->
     <fragment
         android:id="@+id/nav_camera_home"
-        android:name="com.loveprofessor.recyclingapp.CameraHomeFragment"
+        android:name="com.loveprofessor.recyclingapp.camera.CameraHomeFragment"
         android:label="@string/menu_camera_home"
         tools:layout="@layout/fragment_camera_home">
 
@@ -48,23 +51,35 @@
     <!--Camera 결과화면-->
     <fragment
         android:id="@+id/nav_camera_result"
-        android:name="com.loveprofessor.recyclingapp.CameraResultFragment"
+        android:name="com.loveprofessor.recyclingapp.camera.CameraResultFragment"
         android:label="@string/menu_camera_result"
         tools:layout="@layout/fragment_camera_result" />
 
     <!--Camera 결과 목록 화면-->
     <fragment
         android:id="@+id/nav_camera_list"
-        android:name="com.loveprofessor.recyclingapp.CameraListFragment"
+        android:name="com.loveprofessor.recyclingapp.camera.CameraListFragment"
         android:label="@string/menu_camera_list"
         tools:layout="@layout/fragment_camera_list" />
 
     <!--환경 리포트-->
     <fragment
         android:id="@+id/nav_report"
-        android:name="com.loveprofessor.recyclingapp.ReportFragment"
+        android:name="com.loveprofessor.recyclingapp.report.ReportFragment"
         android:label="@string/menu_report"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_report">
+
+        <!--Report -> Report_home 으로 이동-->
+        <action android:id="@+id/action_report_to_report_home"
+            app:destination="@+id/nav_report_home"/>
+    </fragment>
+
+    <!--환경 리포트 홈 화면-->
+    <fragment
+        android:id="@+id/nav_report_home"
+        android:name="com.loveprofessor.recyclingapp.report.ReportHomeFragment"
+        android:label="@string/menu_report_home"
+        tools:layout="@layout/fragment_report_home" />
 
     <!--FAQ-->
     <fragment

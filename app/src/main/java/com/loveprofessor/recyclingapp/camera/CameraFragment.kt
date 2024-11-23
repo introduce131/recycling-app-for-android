@@ -1,13 +1,13 @@
-package com.loveprofessor.recyclingapp
+package com.loveprofessor.recyclingapp.camera
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.loveprofessor.recyclingapp.R
 import com.loveprofessor.recyclingapp.databinding.FragmentCameraBinding
 
 class CameraFragment : Fragment() {
@@ -28,7 +28,7 @@ class CameraFragment : Fragment() {
             .setPopEnterAnim(R.anim.anim_slide_in_from_right_fade_in)
             .build()
 
-        // CameraHome Fragment -> CameraList Fragment 이동
+        // CameraFragment -> CameraHomeFragment 이동
         findNavController().navigate(R.id.action_camera_to_camera_home, null, navOptions)
 
         return binding.root

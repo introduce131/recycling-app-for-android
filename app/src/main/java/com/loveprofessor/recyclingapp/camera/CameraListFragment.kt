@@ -1,4 +1,4 @@
-package com.loveprofessor.recyclingapp
+package com.loveprofessor.recyclingapp.camera
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -7,14 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
+import com.loveprofessor.recyclingapp.CustomAdapter
+import com.loveprofessor.recyclingapp.ListData
+import com.loveprofessor.recyclingapp.MyApplication
 import com.loveprofessor.recyclingapp.databinding.FragmentCameraListBinding
 
 class CameraListFragment : Fragment() {

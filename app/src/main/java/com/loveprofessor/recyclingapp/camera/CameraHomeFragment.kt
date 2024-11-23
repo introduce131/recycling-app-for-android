@@ -1,4 +1,4 @@
-package com.loveprofessor.recyclingapp
+package com.loveprofessor.recyclingapp.camera
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,17 +10,15 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.loveprofessor.recyclingapp.R
 import com.loveprofessor.recyclingapp.ml.ModelUnquant
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
