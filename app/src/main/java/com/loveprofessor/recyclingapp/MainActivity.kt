@@ -28,19 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    // BroadcastReceiver 등록하여 걸음 수를 실시간으로 받기
-    private val stepCountReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == "com.loveprofessor.walksensor.STEP_COUNT_UPDATED") {
-                val stepCount = intent.getIntExtra("step_count", 0)
-
-                // 걸음 수를 ReportHomeFragment로 전달
-                val fragment = supportFragmentManager.findFragmentByTag("ReportHomeFragment") as? ReportHomeFragment
-                fragment?.updateStepCount(stepCount)  // Fragment의 메서드를 호출해서 업데이트
-            }
-        }
-    }
-
     // 권한 요청 코드
     private val REQUEST_CODE_PERMISSION = 100
 
@@ -51,15 +38,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
-
-        // 권한이 부여되었는지 확인
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
-            // 권한이 있으면 서비스를 시작
-            startStepCounterService()
-        } else {
-            // 권한이 없으면 요청
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), REQUEST_CODE_PERMISSION)
-        }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -73,19 +51,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        // BroadcastReceiver 등록
-        val filter = IntentFilter("com.loveprofessor.walksensor.STEP_COUNT_UPDATED")
-        registerReceiver(stepCountReceiver, filter)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        // BroadcastReceiver 해제
-        unregisterReceiver(stepCountReceiver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
