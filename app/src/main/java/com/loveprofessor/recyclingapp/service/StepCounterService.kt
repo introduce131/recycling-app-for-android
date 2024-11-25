@@ -1,8 +1,10 @@
 package com.loveprofessor.recyclingapp.service
 
+import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -13,8 +15,11 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.provider.Settings
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.loveprofessor.recyclingapp.R
+import java.util.Calendar
 
 class StepCounterService : Service() {
 
@@ -62,6 +67,46 @@ class StepCounterService : Service() {
             Toast.makeText(this, "이 디바이스에서 걸음 센서를 찾을 수 없습니다.", Toast.LENGTH_LONG).show()
             stopSelf()  // 센서가 없으면 서비스 종료
         }
+        midnightAlarm()
+    }
+
+    // 자정에 AlarmManager를 통해 작업할 내용이 있음
+    private fun midnightAlarm() {
+        Log.d("jwbaek", "midnightAlarm()")
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, MidnightAlarmReceiver::class.java)
+
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        // 자정 00시 00분으로 설정
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        val timeMidnight = calendar.timeInMillis
+        val currentTime = System.currentTimeMillis()
+
+        // 자정이 이미 지났다면, 내일 자정에 실행되도록 설정을 해줌
+        val trigger = if (timeMidnight > currentTime) timeMidnight else timeMidnight + 24 * 60 * 60 * 1000
+
+        // 매일 자정마다 반복해야 함, INTERVAL_DAY는 하루마다 실행하라는 뜻
+        /*
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            trigger,
+            pendingIntent
+        )
+        */
+
+        // 매일 자정에 반복, 근데 문제가 있음 얘는 절전모드에서 작동하지 않을 수 있고, 진짜 작동 안하는 경우가 있음
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            trigger,
+            AlarmManager.INTERVAL_DAY, // 하루마다 실행
+            pendingIntent
+        )
     }
 
     // 포그라운드 서비스로 시작하는 메서드
