@@ -33,10 +33,11 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == "com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED") {
                 val stepCount = intent.getIntExtra("step_count", 0)
+                val todayStepCount = intent.getIntExtra("today_step_count", 0)
 
                 // 걸음 수를 ReportHomeFragment로 전달
                 val fragment = supportFragmentManager.findFragmentByTag("ReportHomeFragment") as? ReportHomeFragment
-                fragment?.updateStepCount(stepCount)  // Fragment의 메서드를 호출해서 업데이트
+                fragment?.updateStepCount(todayStepCount)  // Fragment의 메서드를 호출해서 업데이트
             }
         }
     }
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
             startStepCounterService()   // 권한이 있으면 서비스를 시작
         } else { // 권한이 없으면 요청
+            Toast.makeText(this, "권한이 거부되었습니다. 설정에서 관련 권한을 활성화 해주세요.", Toast.LENGTH_SHORT).show()
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), REQUEST_CODE_PERMISSION)
         }
 

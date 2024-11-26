@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -28,14 +27,16 @@ import com.loveprofessor.recyclingapp.CustomMarkerView
 import com.loveprofessor.recyclingapp.MyApplication
 import com.loveprofessor.recyclingapp.R
 import com.loveprofessor.recyclingapp.databinding.FragmentReportHomeBinding
+import com.loveprofessor.recyclingapp.service.MidnightAlarmReceiver
 import java.time.LocalDate
 import java.time.DayOfWeek
 import java.time.format.DateTimeFormatter
 
 class ReportHomeFragment : Fragment() {
-
     private lateinit var binding: FragmentReportHomeBinding
+    private lateinit var textViewReportIntro: TextView
     private lateinit var stepCountTextView: TextView
+    private lateinit var todayCarbonTextView: TextView
     private lateinit var barChart: BarChart
     private lateinit var dateText: TextView
     private lateinit var buttonPrevious: ImageButton
@@ -46,7 +47,8 @@ class ReportHomeFragment : Fragment() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == "com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED") {
                 val stepCount = intent.getIntExtra("step_count", 0)
-                updateStepCount(stepCount)
+                val todayStepCount = intent.getIntExtra("today_step_count", 0)
+                updateStepCount(todayStepCount)
             }
         }
     }
@@ -57,11 +59,15 @@ class ReportHomeFragment : Fragment() {
     ): View? {
         binding = FragmentReportHomeBinding.inflate(inflater, container, false)
 
+        textViewReportIntro = binding.textViewReportIntro
         stepCountTextView = binding.stepCountTextView
+        todayCarbonTextView = binding.todayCarbonTextView
         buttonPrevious = binding.imageButtonPrevious
         buttonNext = binding.imageButtonNext
         dateText = binding.dateText
         barChart = binding.barChart
+
+        textViewReportIntro.text = "${MyApplication.userNickname}님은 일주일 동안\n하루 평균 nnn걸음 걸었어요"
 
         // 마커 설정
         val markerView = CustomMarkerView(requireContext(), R.layout.custom_marker)
@@ -95,8 +101,9 @@ class ReportHomeFragment : Fragment() {
 
         // 초기 걸음 수 설정
         val prefs: SharedPreferences = requireContext().getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
-        val stepCount = prefs.getInt("step_count", 0)
-        stepCountTextView.text = "$stepCount"
+        val todayStepCount = prefs.getInt("today_step_count", 0)
+        stepCountTextView.text = "$todayStepCount"
+        todayCarbonTextView.text = "${String.format("%.2f", MidnightAlarmReceiver.calculateCarbon(todayStepCount))}"
 
         return binding.root
     }
@@ -128,10 +135,11 @@ class ReportHomeFragment : Fragment() {
         requireContext().unregisterReceiver(stepCountReceiver)
     }
 
-    fun updateStepCount(stepCount: Int) {
+    fun updateStepCount(todayStepCount: Int) {
         val prefs: SharedPreferences = requireContext().getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
-        prefs.edit().putInt("step_count", stepCount).apply()
-        stepCountTextView.text = "$stepCount"
+        prefs.edit().putInt("today_step_count", todayStepCount).commit()
+        stepCountTextView.text = "$todayStepCount"
+        todayCarbonTextView.text = "${String.format("%.2f", MidnightAlarmReceiver.calculateCarbon(todayStepCount))}"
     }
 
     private fun getCurrentWeekDays(date: LocalDate): MutableList<String> {
@@ -154,19 +162,22 @@ class ReportHomeFragment : Fragment() {
         val db = FirebaseFirestore.getInstance()
         val collectionRef = db.collection("steps_report")
 
+
+
         collectionRef
             .whereEqualTo("userUid", MyApplication.uId)
             .whereIn("report_date", list)
             .orderBy("report_date", com.google.firebase.firestore.Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
-                // 먼저 모든 날짜에 대해 기본값 0으로 초기화
+
+                // 1. 먼저 모든 날짜에 대해 기본값 0으로 초기화
                 for (i in list.indices) {
                     steps.add(BarEntry(i.toFloat(), 0f))
                     carbons.add(BarEntry(i.toFloat(), 0f))
                 }
 
-                // Firestore 데이터로 업데이트
+                // 2. Firestore 데이터로 업데이트
                 for (document in querySnapshot) {
                     val date = document.getString("report_date") ?: continue
                     val stepData = document.getLong("report_step_data") ?: 0
@@ -179,11 +190,36 @@ class ReportHomeFragment : Fragment() {
                     }
                 }
 
-                // 데이터 정렬
+                // 3. 그리고 그 위에 오늘 날짜(baseDate) 데이터 처리
+                val today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))   // 먼저 report_date랑 비교해야되니까 yyyy-MM-dd 형식으로 맞춰주고
+
+                if(!querySnapshot.any { it.getString("report_date") == today}) {
+                    Toast.makeText(requireContext(), "1", Toast.LENGTH_LONG).show()
+
+                    // FireStore에 오늘 날짜(now) 값이 없으면, SharedPreferences에서 걸음수랑 탄소저감량을 가져와야함
+                    val prefs:SharedPreferences = requireContext().getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
+                    val todayStepCountData = prefs.getInt("today_step_count", 0)   // 걸음 수 저장
+                    val carbonData = MidnightAlarmReceiver.calculateCarbon(todayStepCountData)   // 계산된 탄소 저감량 저장
+
+                    Toast.makeText(requireContext(), "2 : ${todayStepCountData}, $carbonData", Toast.LENGTH_LONG).show()
+                    Log.d("jwbaek", "2 : ${todayStepCountData}, $carbonData")
+
+                    // 오늘 날짜에 대한 값을 추가해야됨 이제
+                    val index = list.indexOf(today)
+                    if(index != -1) {
+                        steps[index] = BarEntry(index.toFloat(), todayStepCountData.toFloat())
+                        carbons[index] = BarEntry(index.toFloat(), carbonData)
+                    }
+
+                    Toast.makeText(requireContext(), "3 : $list", Toast.LENGTH_LONG).show()
+                    Log.d("jwbaek", "3 : $list")
+                }
+
+                // 데이터 정렬, 요일 별로 다시 정렬을 한다고 보면 됨.
                 steps.sortBy { it.x }
                 carbons.sortBy { it.x }
 
-                // 차트 업데이트
+                // steps값과 carbons값을 넘기고 차트를 그려준다.
                 setChartBar(steps, carbons)
             }
             .addOnFailureListener { exception ->

@@ -26,6 +26,7 @@ class StepCounterService : Service() {
     private lateinit var sensorManager: SensorManager
     private var stepCounterSensor: Sensor? = null
     private var stepCount = 0
+    private var todayStepCount = 0
     private var stepCounterListener: SensorEventListener? = null
 
     private val NOTIFICATION_CHANNEL_ID = "step_counter_service_channel"
@@ -40,20 +41,28 @@ class StepCounterService : Service() {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
+
         // 센서가 존재할 경우 이벤트 리스너 등록
         if (stepCounterSensor != null) {
             stepCounterListener = object : SensorEventListener {
                 override fun onSensorChanged(event: SensorEvent?) {
                     if (event?.sensor?.type == Sensor.TYPE_STEP_COUNTER) {
-                        stepCount = event.values[0].toInt()
-
-                        // 걸음 수를 SharedPreferences에 저장
                         val prefs = getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
-                        prefs.edit().putInt("step_count", stepCount).apply()
+                        val lastStepCount = prefs.getInt("last_step_count", 0)  // 어제까지 누적 걸음 수 데이터
+
+                        stepCount = event.values[0].toInt() // 누적 걸음 수
+                        todayStepCount = stepCount - lastStepCount  // 오늘 걸음 수 (누적걸음 - 어제까지 누적걸음)
+                        // 걸음 수를 SharedPreferences에 저장
+                        with(prefs.edit()) {
+                            putInt("step_count", stepCount)
+                            putInt("today_step_count", todayStepCount)
+                            apply()
+                        }
 
                         // 걸음 수가 갱신될 때마다 Broadcast로 알림
                         val intent = Intent("com.loveprofessor.walksensor.STEP_COUNT_UPDATED")
                         intent.putExtra("step_count", stepCount)
+                        intent.putExtra("today_step_count", todayStepCount)  // 오늘의 걸음 수도 전달
                         sendBroadcast(intent)
                     }
                 }
@@ -100,7 +109,7 @@ class StepCounterService : Service() {
         )
         */
 
-        // 매일 자정에 반복, 근데 문제가 있음 얘는 절전모드에서 작동하지 않을 수 있고, 진짜 작동 안하는 경우가 있음
+        // 매일 자정에 반복, 근데 문제가 있음 얘는 절전모드에서 작동하지 않을 수 있고, 테스트해보니까 진짜 작동 안하는 경우가 있어서 당황스러움
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             trigger,

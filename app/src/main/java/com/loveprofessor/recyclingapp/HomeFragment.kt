@@ -72,6 +72,10 @@ class HomeFragment : Fragment() {
         menuReport.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_report)
         }
+
+        menuFAQ.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_faq)
+        }
         return binding.root
     }
 
