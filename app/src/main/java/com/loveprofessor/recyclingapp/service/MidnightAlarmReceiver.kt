@@ -12,26 +12,30 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class MidnightAlarmReceiver : BroadcastReceiver() {
-
     override fun onReceive(context: Context, intent: Intent) {
-        Log.d("jwbaek", "onReceive 호출됨")  // 로그 추가
-        // 1. 일단 SharedPreferences에서 오늘의 걸음 수(step_prefs)를 가져오기
-        val prefs: SharedPreferences = context.getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
-        val stepCount = prefs.getInt("step_count", 0)
-        val todayStepCount = prefs.getInt("today_step_count", 0)
+        Thread {
+            Log.d("jwbaek", "1. onReceive 호출됨")  // 로그 추가
+            // 1. 일단 SharedPreferences에서 오늘의 걸음 수(step_prefs)를 가져오기
+            val prefs: SharedPreferences =
+                context.getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
+            val stepCount = prefs.getInt("step_count", 0)
+            val todayStepCount = prefs.getInt("today_step_count", 0)
 
-        // Firestore에 오늘의 걸음 수를 저장
-        saveStepCount(context, todayStepCount)
+            Log.d("jwbaek", "2. stepCount : $stepCount , todayStepCount : $todayStepCount")
 
-        // SharedPreferences에서 걸음 수 초기화
-        resetStepCount(context)
+            // 2. Firestore에 오늘의 걸음 수를 저장
+            saveStepCount(context, todayStepCount)
+
+            // 3. SharedPreferences에서 걸음 수 초기화
+            resetStepCount(context)
+        }.start()
     }
 
     private fun saveStepCount(context: Context, todayStepCount: Int) {
         val db = FirebaseFirestore.getInstance()
         val reportDate = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
-        Log.d("JWBAEK", "이 로직을 제시간안에 타야한다.")
+        Log.d("jwbaek", "3. fireStore에 저장하는 로직에 탔음.")
 
         val reportData = hashMapOf(
             "userUid" to MyApplication.uId,
@@ -39,6 +43,8 @@ class MidnightAlarmReceiver : BroadcastReceiver() {
             "report_step_data" to todayStepCount,
             "report_carbon_data" to calculateCarbon(todayStepCount) // 탄소 절감량 계산
         )
+
+
 
         db.collection("steps_report")
             .add(reportData)
@@ -58,8 +64,14 @@ class MidnightAlarmReceiver : BroadcastReceiver() {
     private fun resetStepCount(context: Context) {
         val prefs: SharedPreferences = context.getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
         val stepCount = prefs.getInt("step_count", 0)
+        val todayStepCount = prefs.getInt("today_step_count", 0)
 
-        prefs.edit().putInt("last_step_count", stepCount).apply()   // 여태까지의 누적 걸음수를 last_step_count에 저장함.
+        Log.d("jwbaek", "4. 초기화 전 -> stepCount : $stepCount , todayStepCount : $todayStepCount")
+
+        prefs.edit()
+            .putInt("last_step_count", stepCount) // 여태까지의 누적 걸음수를 last_step_count에 저장함.
+            .putInt("today_step_count", 0) // 오늘의 걸음수를 새롭게 저장해야하니 0으로 초기화 함.
+            .commit()
     }
 
     // 탄소 저감량을 계산해주는 메소드 calculateCarbon, 일단 계산은 대강 해놨음

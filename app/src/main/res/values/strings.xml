@@ -17,6 +17,7 @@
     <string name="menu_camera_list">Camera List</string>
     <string name="menu_report_home">Report Home</string>
     <string name="menu_faq_home">FAQ Home</string>
+    <string name="menu_search_home">Search Home</string>
 
     <string name="mon">월요일</string>
     <string name="tue">화요일</string>

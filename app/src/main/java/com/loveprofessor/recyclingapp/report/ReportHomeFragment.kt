@@ -162,8 +162,6 @@ class ReportHomeFragment : Fragment() {
         val db = FirebaseFirestore.getInstance()
         val collectionRef = db.collection("steps_report")
 
-
-
         collectionRef
             .whereEqualTo("userUid", MyApplication.uId)
             .whereIn("report_date", list)
@@ -194,15 +192,13 @@ class ReportHomeFragment : Fragment() {
                 val today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))   // 먼저 report_date랑 비교해야되니까 yyyy-MM-dd 형식으로 맞춰주고
 
                 if(!querySnapshot.any { it.getString("report_date") == today}) {
-                    Toast.makeText(requireContext(), "1", Toast.LENGTH_LONG).show()
 
                     // FireStore에 오늘 날짜(now) 값이 없으면, SharedPreferences에서 걸음수랑 탄소저감량을 가져와야함
                     val prefs:SharedPreferences = requireContext().getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
                     val todayStepCountData = prefs.getInt("today_step_count", 0)   // 걸음 수 저장
                     val carbonData = MidnightAlarmReceiver.calculateCarbon(todayStepCountData)   // 계산된 탄소 저감량 저장
 
-                    Toast.makeText(requireContext(), "2 : ${todayStepCountData}, $carbonData", Toast.LENGTH_LONG).show()
-                    Log.d("jwbaek", "2 : ${todayStepCountData}, $carbonData")
+                    Log.d("jwbaek", "1 : ${todayStepCountData}, $carbonData")
 
                     // 오늘 날짜에 대한 값을 추가해야됨 이제
                     val index = list.indexOf(today)
@@ -211,7 +207,6 @@ class ReportHomeFragment : Fragment() {
                         carbons[index] = BarEntry(index.toFloat(), carbonData)
                     }
 
-                    Toast.makeText(requireContext(), "3 : $list", Toast.LENGTH_LONG).show()
                     Log.d("jwbaek", "3 : $list")
                 }
 

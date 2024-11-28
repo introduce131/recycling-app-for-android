@@ -59,7 +59,7 @@ class StepCounterService : Service() {
                             apply()
                         }
 
-                        // 걸음 수가 갱신될 때마다 Broadcast로 알림
+                        // 걸음 수가 갱신될 때(onSensorChanged)마다 Broadcast로 알림
                         val intent = Intent("com.loveprofessor.walksensor.STEP_COUNT_UPDATED")
                         intent.putExtra("step_count", stepCount)
                         intent.putExtra("today_step_count", todayStepCount)  // 오늘의 걸음 수도 전달
@@ -80,7 +80,7 @@ class StepCounterService : Service() {
     }
 
     // 자정에 AlarmManager를 통해 작업할 내용이 있음
-    private fun midnightAlarm() {
+    fun midnightAlarm() {
         Log.d("jwbaek", "midnightAlarm()")
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, MidnightAlarmReceiver::class.java)
@@ -89,9 +89,9 @@ class StepCounterService : Service() {
 
         // 자정 00시 00분으로 설정
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 0)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.HOUR_OF_DAY, 16)
+        calendar.set(Calendar.MINUTE, 12)
+        calendar.set(Calendar.SECOND, 30)
         calendar.set(Calendar.MILLISECOND, 0)
 
         val timeMidnight = calendar.timeInMillis
@@ -101,14 +101,13 @@ class StepCounterService : Service() {
         val trigger = if (timeMidnight > currentTime) timeMidnight else timeMidnight + 24 * 60 * 60 * 1000
 
         // 매일 자정마다 반복해야 함, INTERVAL_DAY는 하루마다 실행하라는 뜻
-        /*
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
             trigger,
             pendingIntent
         )
-        */
 
+        /*
         // 매일 자정에 반복, 근데 문제가 있음 얘는 절전모드에서 작동하지 않을 수 있고, 테스트해보니까 진짜 작동 안하는 경우가 있어서 당황스러움
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
@@ -116,10 +115,13 @@ class StepCounterService : Service() {
             AlarmManager.INTERVAL_DAY, // 하루마다 실행
             pendingIntent
         )
+         */
     }
 
     // 포그라운드 서비스로 시작하는 메서드
     private fun startForegroundService() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
         // 포그라운드 서비스 알림 채널 설정 (Android 8.0 이상에서 필요)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -127,7 +129,6 @@ class StepCounterService : Service() {
                 "Step Counter Service",
                 NotificationManager.IMPORTANCE_LOW
             )
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
 
@@ -137,6 +138,8 @@ class StepCounterService : Service() {
             .setContentText("걸음 수를 추적하고 있습니다.")
             .setSmallIcon(R.drawable.ic_launcher_foreground) // 알림 아이콘 확인 필요
             .build()
+
+        notificationManager.notify(1, notification)
 
         // 서비스가 포그라운드에서 실행되도록 설정
         startForeground(1, notification)

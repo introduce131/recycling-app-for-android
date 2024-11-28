@@ -76,6 +76,11 @@ class HomeFragment : Fragment() {
         menuFAQ.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_faq)
         }
+
+        menuPointSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_search)
+        }
+
         return binding.root
     }
 

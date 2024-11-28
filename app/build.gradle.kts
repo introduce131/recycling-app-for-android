@@ -1,7 +1,14 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+}
+
+val properties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
 }
 
 android {
@@ -16,6 +23,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "KAKAO_MAP_KEY", properties.getProperty("KAKAO_MAP_KEY"))
     }
 
     buildTypes {
@@ -31,6 +40,7 @@ android {
     buildFeatures {
         viewBinding = true
         mlModelBinding = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -62,6 +72,9 @@ dependencies {
 
     /* MPAndroidChart */
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    /* kakao맵 */
+    implementation("com.kakao.maps.open:android:2.9.5")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
