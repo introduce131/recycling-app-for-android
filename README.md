@@ -1,5 +1,10 @@
 # Recyling-app-for-android 
 
+!카카오맵이 x86/x64 환경에선 작동하지 않음!
+- https://devtalk.kakao.com/t/v2-libk3fandroid-so/140053
+- Window 환경의 안드로이드 에뮬레이터는 작동하지 않을 가능성이 높지만
+- 실제 기기에선 작동할 가능성이 높음 왜냐면 현재 대다수의 android 기기는 ARM으로 동작하기 때문
+
 ## 테스트 방법
 1. 먼저 코드를 최신으로 내려받는다
 2. 그리고 firebase 프로젝트에 들어간다
