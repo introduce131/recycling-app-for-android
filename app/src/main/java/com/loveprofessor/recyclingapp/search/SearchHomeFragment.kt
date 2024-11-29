@@ -29,16 +29,13 @@ class SearchHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =  FragmentSearchHomeBinding.inflate(inflater, container, false)
-
-        val url = BuildConfig.POINT_USAGE_URL
-        callFirebaseFunction(url)
+        callFirebaseFunction(BuildConfig.POINT_USAGE_URL)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         showMapView()
     }
 
