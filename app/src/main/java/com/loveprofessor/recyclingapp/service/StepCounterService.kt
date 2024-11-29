@@ -87,10 +87,10 @@ class StepCounterService : Service() {
 
         val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-        // 자정 00시 00분으로 설정
+        // 자정 00시 00분 30초로 설정
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 16)
-        calendar.set(Calendar.MINUTE, 12)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 30)
         calendar.set(Calendar.MILLISECOND, 0)
 
