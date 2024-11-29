@@ -13,18 +13,26 @@ import com.kakao.vectormap.MapLifeCycleCallback
 import com.kakao.vectormap.MapView
 import com.loveprofessor.recyclingapp.databinding.FragmentSearchHomeBinding
 import com.loveprofessor.recyclingapp.BuildConfig
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import java.lang.Exception
 
 class SearchHomeFragment : Fragment() {
     private lateinit var binding: FragmentSearchHomeBinding
     private lateinit var mapView: MapView
     private var kakaoMap : KakaoMap? = null
+    private val client = OkHttpClient()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding =  FragmentSearchHomeBinding.inflate(inflater, container, false)
+
+        val url = BuildConfig.POINT_USAGE_URL
+        callFirebaseFunction(url)
+
         return binding.root
     }
 
@@ -56,5 +64,28 @@ class SearchHomeFragment : Fragment() {
                 kakaoMap = p0
             }
         })
+    }
+
+    // URL 주소로 FirebaseFunction를 호출하는 함수 callFirebaseFunction
+    private fun callFirebaseFunction(url: String) {
+        // 비동기 처리로 HTTP 요청 보내기
+        Thread {
+            try {
+                val request = Request.Builder()
+                    .url(url)
+                    .build()
+
+                val response: Response = client.newCall(request).execute()
+
+                if (response.isSuccessful) {
+                    val responseData = response.body?.string()
+                    Log.d("FirebaseFunctions", "Response: $responseData")
+                } else {
+                    Log.e("FirebaseFunctions", "Error: ${response.message}")
+                }
+            } catch (e: Exception) {
+                Log.e("FirebaseFunctions", "Request failed", e)
+            }
+        }.start()
     }
 }

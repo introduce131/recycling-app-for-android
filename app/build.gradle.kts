@@ -23,11 +23,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "KAKAO_MAP_KEY", properties.getProperty("KAKAO_MAP_KEY"))
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "KAKAO_MAP_KEY", properties.getProperty("KAKAO_MAP_KEY"))      // 카카오맵 API KEY
+            buildConfigField("String", "POINT_USAGE_URL", properties.getProperty("POINT_USAGE_URL"))  // 탄소중립포인트 사용처 API KEY
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -54,14 +56,15 @@ android {
 
 dependencies {
     /* firebase auth 의존성 추가 */
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.1.0")
 
-    /* fireStore, storage 의존성 추가 */
+    /* fireStore, storage, functions 의존성 추가 */
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.0")
     implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
+    implementation("com.google.firebase:firebase-functions")
 
     /* Glide 의존성 추가 */
     implementation("com.github.bumptech.glide:glide:4.13.2")
@@ -75,6 +78,8 @@ dependencies {
 
     /* kakao맵 */
     implementation("com.kakao.maps.open:android:2.9.5")
+
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
