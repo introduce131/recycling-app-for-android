@@ -43,16 +43,6 @@ class ReportHomeFragment : Fragment() {
     private lateinit var buttonNext: ImageButton
     private var baseDate: LocalDate = LocalDate.now()  // baseDate를 클래스 레벨 변수로 이동
 
-    private val stepCountReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == "com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED") {
-                val stepCount = intent.getIntExtra("step_count", 0)
-                val todayStepCount = intent.getIntExtra("today_step_count", 0)
-                updateStepCount(todayStepCount)
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -122,24 +112,6 @@ class ReportHomeFragment : Fragment() {
         val firstDay = list.first()
         val lastDay = list.last()
         dateText.text = "$firstDay ~ $lastDay"
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val filter = IntentFilter("com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED")
-        requireContext().registerReceiver(stepCountReceiver, filter)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        requireContext().unregisterReceiver(stepCountReceiver)
-    }
-
-    fun updateStepCount(todayStepCount: Int) {
-        val prefs: SharedPreferences = requireContext().getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
-        prefs.edit().putInt("today_step_count", todayStepCount).commit()
-        stepCountTextView.text = "$todayStepCount"
-        todayCarbonTextView.text = "${String.format("%.2f", MidnightAlarmReceiver.calculateCarbon(todayStepCount))}"
     }
 
     private fun getCurrentWeekDays(date: LocalDate): MutableList<String> {
