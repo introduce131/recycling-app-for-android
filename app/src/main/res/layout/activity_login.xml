@@ -7,13 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <Button
+   <!--  <Button
         android:id="@+id/googleLoginBtn"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:text="Continue With Google"
+        android:text="Sign in with Google"
         android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:background="@drawable/android_dark_sq_si"
+        android:drawablePadding="8dp"
         android:backgroundTint="#3F3F3F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956"
+        app:layout_constraintWidth_percent="0.7" />  -->
+
+    <ImageButton
+        android:id="@+id/googleLoginBtn"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="Continue in with Google"
+        android:src="@drawable/android_light_sq_ctn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"

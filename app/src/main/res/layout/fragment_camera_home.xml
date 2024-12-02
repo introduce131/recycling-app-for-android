@@ -32,38 +32,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <ImageView
+
+    <TextView
         android:id="@+id/recycleImageView"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
         android:layout_marginTop="52dp"
         android:scaleType="centerCrop"
-        android:background="#F7CBFF"
+        android:text="사진을 정면에서 찍어주세요.\n올바른 분리배출을 위한 정확한 정보를 제공합니다."
+        android:textColor="#666666"
+        android:textSize="20sp"
+        android:gravity="center"
         android:contentDescription="재활용품 사진"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/buttonPhotoGraph"
         android:layout_width="325dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="56dp"
         android:text="@string/camera_photograph"
+        android:background="@drawable/back_black_radius"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recycleImageView" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/buttonSearchList"
         android:layout_width="325dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginBottom="36dp"
         android:text="@string/camera_searchList"
+        android:background="@drawable/back_white_radius_border"
+        android:textColor="#000000"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,11 +6,133 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--하위 프래그먼트를 담을 FrameLayout-->
+    <!-- 하위 프래그먼트를 담을 FrameLayout -->
     <FrameLayout
         android:id="@+id/faq_container"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:context=".report.ReportFragment" />
+
+    <!-- 툴바 설정 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="parent"
-        tools:context=".report.ReportFragment"/>
+        android:background="#E4E4E4"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:contentDescription="뒤로가기 버튼"
+            android:padding="0dp"
+            android:src="@drawable/arrow_back_icon" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="FAQ"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- 첫 번째 버튼 -->
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#D1FF9B"
+        android:text="궁금한 점을 검색해보세요."
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:drawableLeft="@drawable/search_icon" />
+
+    <!-- 두 번째 버튼 -->
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#D1FF9B"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:text="라벨이 붙어있는 플라스틱은 어떻게 버려야 하나요?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button2"
+        android:drawableRight="@drawable/greater_than_icon" />
+
+    <!-- 세 번째 버튼 -->
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#D1FF9B"
+        android:textColor="#000000"
+        android:text="질문2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button3"
+        android:drawableRight="@drawable/greater_than_icon" />
+
+    <!-- 네 번째 버튼 -->
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#D1FF9B"
+        android:textColor="#000000"
+        android:text="질문3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button4"
+        android:drawableRight="@drawable/greater_than_icon" />
+
+    <!-- 다섯 번째 버튼 -->
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#D1FF9B"
+        android:textColor="#000000"
+        android:text="질문4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button5"
+        android:drawableRight="@drawable/greater_than_icon" />
+
+    <!-- 여섯 번째 버튼 -->
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#D1FF9B"
+        android:textColor="#000000"
+        android:text="질문4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button6"
+        android:drawableRight="@drawable/greater_than_icon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

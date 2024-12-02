@@ -15,7 +15,7 @@
         android:background="@drawable/text_view_border"
         android:padding="20dp"
         android:text="닉네임님\n금요일은 재활용쓰레기\n버리는 날이에요!"
-        android:textColor="@color/black"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#D8F2CC">
 
                     <!--메뉴 이름-->
                     <TextView
@@ -129,7 +130,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#D8F2CC">
 
                     <!--메뉴 이름-->
                     <TextView
@@ -203,7 +205,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#D8F2CC">
 
                     <!--메뉴 이름-->
                     <TextView
@@ -269,7 +272,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#D8F2CC">
 
                     <!--메뉴 이름-->
                     <TextView
