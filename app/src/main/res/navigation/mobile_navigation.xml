@@ -59,7 +59,19 @@
         android:id="@+id/nav_camera_result"
         android:name="com.loveprofessor.recyclingapp.camera.CameraResultFragment"
         android:label="@string/menu_camera_result"
-        tools:layout="@layout/fragment_camera_result" />
+        tools:layout="@layout/fragment_camera_result">
+
+        <!--Camera_Result -> Camera_Report 으로 이동-->
+        <action android:id="@+id/action_camera_result_to_camera_report"
+            app:destination="@+id/nav_camera_report"/>
+    </fragment>
+
+    <!--Camera 결과오류 전송화면-->
+    <fragment
+        android:id="@+id/nav_camera_report"
+        android:name="com.loveprofessor.recyclingapp.camera.CameraReportFragment"
+        android:label="@string/menu_camera_report"
+        tools:layout="@layout/fragment_camera_report" />
 
     <!--Camera 결과 목록 화면-->
     <fragment

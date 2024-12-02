@@ -37,10 +37,10 @@ class InputDayFragment : Fragment() {
         binding = FragmentInputDayBinding.inflate(inflater, container, false)
         buttonNext = binding.buttonNext
 
-        // 요일 체크박스 array
+        // 요일 체크박스 array (월~일)
         dayCheckBoxes = arrayOf(
             binding.checkBoxMon, binding.checkBoxTue, binding.checkBoxWed,
-            binding.checkBoxThu, binding.checkBoxFri, binding.checkBoxSat, binding.checkBoxSat
+            binding.checkBoxThu, binding.checkBoxFri, binding.checkBoxSat, binding.checkBoxSun
         )
 
         // 실시간으로 버튼을 활성화시킬지 감지 시켜야함
@@ -71,6 +71,7 @@ class InputDayFragment : Fragment() {
                 if(checkBox.isChecked) checkedDays.add(checkBox.text.toString())
             }
             val result = checkedDays.joinToString(",")  // List를 하나의 문자열로 반환해주는 joinToString, 예)"월요일,화요일,목요일,금요일"
+            Log.d("inputday", "1. 요일 string : $result")
 
             /* MyApplication에 쓰레기 버리는 날을 저장한다. 예)"월요일,화요일,목요일,금요일" */
             MyApplication.userGarbageday = result

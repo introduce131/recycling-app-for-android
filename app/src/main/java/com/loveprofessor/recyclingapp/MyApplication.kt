@@ -16,5 +16,15 @@ class MyApplication:Application() { // 신기하다. Manifest.xml의 Application
         lateinit var userNickname:String    // 앱에서 지정한 닉네임
         lateinit var userZone:String        // 앱에서 지정한 사는 지역
         lateinit var userGarbageday:String   // 앱에서 지정한 쓰레기 버리는 요일 (구분자 ",")
+
+        // 유저 정보 초기화 static method
+        fun userInfoReset() {
+            this.uId = ""
+            this.userEmail = ""
+            this.userName = ""
+            this.userNickname = ""
+            this.userZone = ""
+            this.userGarbageday = ""
+        }
     }
 }

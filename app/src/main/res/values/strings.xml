@@ -5,7 +5,10 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+
+    <string name="action_logout">로그아웃</string>
+    <string name="action_exit">앱 종료하기</string>
+    <string name="action_image_report">검색결과 오류신고</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_camera">Camera</string>
@@ -14,6 +17,7 @@
     <string name="menu_search">Search</string>
     <string name="menu_camera_home">Camera Home</string>
     <string name="menu_camera_result">Camera Result</string>
+    <string name="menu_camera_report">Camera Report</string>
     <string name="menu_camera_list">Camera List</string>
     <string name="menu_report_home">Report Home</string>
     <string name="menu_faq_home">FAQ Home</string>
@@ -50,9 +54,15 @@
     <string name="camera_list_title">이전 검색 List</string>
     <string name="camera_list_delete"><u>검색기록 전체 삭제</u></string>
 
+    <string name="camera_report_submit">결과 전송하기</string>
+
     <string name="separate_guide">지역마다 수거 방법이나 분리배출 규정이 조금씩 다를 수 있으니, 자치단체나 재활용 가이드라인에 따라 정확한 방법을 따르는 것이 좋습니다</string>
 
     <string name="search_guide">내 주변 탄소 중립 포인트 사용처</string>
+    <string name="search_category_all">전체</string>
+    <string name="search_category_receipt">전자 영수증</string>
+    <string name="search_category_tumbler">텀블러·다회용컵</string>
+    <string name="search_category_eco_item">친환경 상품</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

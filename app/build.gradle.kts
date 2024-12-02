@@ -28,6 +28,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "KAKAO_MAP_KEY", properties.getProperty("KAKAO_MAP_KEY"))      // 카카오맵 API KEY
+            buildConfigField("String", "KAKAO_REST_API_KEY", properties.getProperty("KAKAO_REST_API_KEY"))      // 카카오맵 Local REST API KEY
             buildConfigField("String", "POINT_USAGE_URL", properties.getProperty("POINT_USAGE_URL"))  // 탄소중립포인트 사용처 API KEY
         }
         release {
@@ -76,10 +77,11 @@ dependencies {
     /* MPAndroidChart */
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    /* kakao맵 */
+    /* kakao맵, okHttp, Gson*/
     implementation("com.kakao.maps.open:android:2.9.5")
-
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

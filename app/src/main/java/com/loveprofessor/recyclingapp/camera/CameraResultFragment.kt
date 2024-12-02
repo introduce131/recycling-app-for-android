@@ -7,16 +7,24 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavOptions
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.storage
 import com.loveprofessor.recyclingapp.MyApplication
+import com.loveprofessor.recyclingapp.R
 import com.loveprofessor.recyclingapp.databinding.FragmentCameraResultBinding
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -46,6 +54,40 @@ class CameraResultFragment : Fragment() {
         // 전환되기 전 fragment인 CameraHomeFragment에서 넘어온 인자(arguments)를 bundle에 저장함
         val bundle = arguments
 
+        /** fragment에 메뉴 추가하는 코드
+         * https://velog.io/@abc9985/AndroidsetHasOptionsMenu-deprecated-%EB%90%98%EC%97%88%EC%9C%BC%EB%8B%88-addMenuProvider-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-fragment
+         * 궁금하면 한 번 읽어보는게 이해에 도움이 될 듯하다. **/
+        val menuHost:MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.report_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    // 검색결과 오류신고, 새 프래그먼트로 이동할거임.
+                    R.id.action_image_report -> {
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(R.id.nav_camera_result, false)
+                            .setEnterAnim(R.anim.anim_slide_in_from_left_fade_in)
+                            .setPopEnterAnim(R.anim.anim_slide_in_from_right_fade_in)
+                            .build()
+
+                        // 이미지 받아와서 업로드해야되니까 bundle로 bitmapImage값을 넘김
+                        val bundle = Bundle().apply {
+                            putParcelable("imageBitmap", bitmapImage)    // Bitmap 데이터 전달
+                        }
+
+                        findNavController().navigate(R.id.action_camera_result_to_camera_report, bundle, navOptions)
+                        true
+                    }
+                    else -> {
+                        false
+                    }
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED) // <- Fragment의 뷰가 활성화된 후, 상호작용 가능한 상태에서만 메뉴를 표시한다는 의미다.
+
         // 이건 진짜 이렇게까지 해야되나 싶긴한데 getParcelable 함수가 API33(티라미수) 이하 버전이랑 이상버전일 때 넘기는 인자값이 다름
         // 그래서 33 이상과 이하일 때 각각 처리를 따로 해줘야 한다
         // 진짜 조건을 저렇게 설정해주니까 빨간줄이 사라지네.... 신기하다
@@ -53,7 +95,7 @@ class CameraResultFragment : Fragment() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             bitmapImage = bundle?.getParcelable<Bitmap>("imageBitmap", Bitmap::class.java)
         } else {
-            // API 33 미만에서는 그냥 원래대로 처리하면 됨, 물론 코드는 취소선으로 표시되겠지만...
+            // API 33 미만에서는 그냥 원래대로 처리하면 됨, 물론 에디터에서는 코드가 취소선으로 표시되겠지만...
             bitmapImage = bundle?.getParcelable<Bitmap>("imageBitmap")
         }
 

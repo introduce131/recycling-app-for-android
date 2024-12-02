@@ -213,8 +213,6 @@ class CameraHomeFragment : Fragment() {
         // 다음 프래그먼트로 넘길 결과 예)plastic
         resultCategory = predictedLabel
 
-        //tvOutput.text = resultText.toString()
-
         // 모델 리소스 해제
         model.close()
     }
