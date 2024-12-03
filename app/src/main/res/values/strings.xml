@@ -9,14 +9,14 @@
 
     <string name="client_id">25057406424-ch45tjcqq3d3odg9640s9p53qak1n451.apps.googleusercontent.com</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_camera">Camera</string>
-    <string name="menu_report">Report</string>
+    <string name="menu_home">ECOBIN</string>
+    <string name="menu_camera">검색</string>
+    <string name="menu_report">환경리포트</string>
     <string name="menu_faq">FAQ</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_camera_home">Camera Home</string>
-    <string name="menu_camera_result">Camera Result</string>
-    <string name="menu_camera_list">Camera List</string>
+    <string name="menu_search">검색</string>
+    <string name="menu_camera_home">검색</string>
+    <string name="menu_camera_result">검색 결과</string>
+    <string name="menu_camera_list">이전 검색 기록</string>
 
     <string name="mon">월요일</string>
     <string name="tue">화요일</string>
