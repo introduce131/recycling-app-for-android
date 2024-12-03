@@ -32,7 +32,7 @@ class CameraListFragment : Fragment() {
             //.orderBy("uploadDt", Query.Direction.DESCENDING)
         listData = ArrayList<ListData>()
 
-        query.get().addOnSuccessListener { querySnapshot->
+        query.get().addOnSuccessListener { querySnapshot ->
             // 성공적으로 데이터를 가져온 경우
             for (document in querySnapshot) {
                 val result = document.toObject(ClassifyResultData::class.java)

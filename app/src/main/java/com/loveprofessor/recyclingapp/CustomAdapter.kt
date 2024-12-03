@@ -54,7 +54,7 @@ class CustomAdapter(val listData: ArrayList<ListData>): RecyclerView.Adapter<Cus
         }
     }
 
-    // dateFormating을 처리핳는 메서드 getFormatDate
+    // dateFormating을 처리하는 메서드 getFormatDate
     private fun getFormatDate(uploadDt:String):String {
         val inputFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
         val outputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/list_item_border"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <!--텍스트뷰 2개를 감쌀 LinearLayout-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/rv_qText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q."
+            android:textSize="23sp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <!--카테고리 (제목)-->
+        <TextView
+            android:id="@+id/rv_question"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:paddingStart="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="제목 1"/>
+
+        <!--카테고리 (업로드 날짜)-->
+        <ImageButton
+            android:id="@+id/rv_nextButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_button_next"
+            android:background="@color/float_transparent" />
+    </LinearLayout>
+</LinearLayout>

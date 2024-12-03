@@ -73,6 +73,7 @@ class CameraReportFragment : Fragment() {
             }
         }
 
+        /** Compress() 함수 사용방법 : https://als2019.tistory.com/58 **/
         binding.buttonSubmit.setOnClickListener {
             // storage에 파일 업로드할 객체를 여기서 생성함
             val storage: FirebaseStorage = Firebase.storage
@@ -123,7 +124,7 @@ class CameraReportFragment : Fragment() {
                             .show()
                     }.addOnFailureListener{ exception ->
                         // url 다운로드 실패
-                        Log.d("Storage", "Download URL Failed : ${exception.message}")
+                        Log.d("Storage", "다운로드 실패 : ${exception.message}")
                     }
                 } else { // 업로드 실패
                     Log.d("Storage", "upload failed..")
