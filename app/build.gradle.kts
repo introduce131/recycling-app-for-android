@@ -78,7 +78,6 @@ dependencies {
 
     /* kakao맵 */
     implementation("com.kakao.maps.open:android:2.9.5")
-
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
     implementation(libs.androidx.core.ktx)
