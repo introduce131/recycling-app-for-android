@@ -21,6 +21,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="35sp"
                 android:text="@string/camera_list_title"
+                android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp" />

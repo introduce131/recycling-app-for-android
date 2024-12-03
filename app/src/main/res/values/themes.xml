@@ -19,6 +19,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="ToolbarMenuTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorSecondary">@color/black</item> <!-- 메뉴 텍스트 색상 -->
+        <item name="android:tint">@color/black</item> <!-- 아이콘 색상 -->
+    </style>
+
     <style name="Theme.RecyclingApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.RecyclingApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

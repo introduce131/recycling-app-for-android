@@ -64,7 +64,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="배출 방법"
-                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:background="#D8F2CC"
                 android:textAlignment="center"/>
 
             <!-- 배출 방법 -->
@@ -76,12 +78,15 @@
                 android:paddingRight="25dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textSize="15sp"
+                android:textSize="16dp"
+                android:textColor="#000000"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="50dp"
                 android:textAlignment="textStart"
                 android:breakStrategy="high_quality"
-                android:text="1. 종이팩의 내용물을 비우고 물로 헹궈주세요.\n2. 종이팩을 펼친 후, 잘 말려주세요.\n3. 반드시 일반폐지와 분리하여 종이팩 수거함에 넣어주세요.\n\n- 다른 종이류와 혼합되지 않게 공동주택 등 종이팩 전용수거함(일반팩‧멸균팩)에 배출해주세요.\n- 종이팩은 일반폐지와 분리해서 배출해주세요." />
+                android:text="1. 종이팩의 내용물을 비우고 물로 헹궈주세요.\n2. 종이팩을 펼친 후, 잘 말려주세요.\n3. 반드시 일반폐지와 분리하여 종이팩 수거함에 넣어주세요.\n\n- 다른 종이류와 혼합되지 않게 공동주택 등 종이팩 전용수거함(일반팩‧멸균팩)에 배출해주세요.\n- 종이팩은 일반폐지와 분리해서 배출해주세요."
+
+                />
 
             <!-- 재활용이 가능한 품목 Label -->
             <TextView
@@ -91,7 +96,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="재활용이 가능한 품목은 다음과 같아요."
-                android:textSize="16sp"
+                android:textColor="#686868"
+                android:textSize="15dp"
                 android:textAlignment="center"/>
 
             <!-- 재활용이 가능한 품목 -->
@@ -107,6 +113,7 @@
                 android:layout_marginBottom="50dp"
                 android:textAlignment="center"
                 android:breakStrategy="high_quality"
+                android:textSize="13dp"
                 android:text="신문지, 책, 종이상자류, 달력, 포장지, 우유팩 등" />
 
             <!-- 재활용이 불가능한 or 비해당 품목 Label -->
@@ -117,7 +124,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="아래 품목들은 비해당 돼요."
-                android:textSize="16sp"
+                android:textColor="#686868"
+                android:textSize="15dp"
                 android:textAlignment="center"/>
 
             <!-- 재활용이 불가능한 품목 -->
@@ -133,6 +141,7 @@
                 android:layout_marginBottom="50dp"
                 android:textAlignment="center"
                 android:breakStrategy="high_quality"
+                android:textSize="13dp"
                 android:text="비닐코팅된 종이류, 테이프, 스프링 등 이물질이 함께 붙어있는 책자 등" />
 
             <!-- 재활용품인 척하는 쓰레기 Label -->
@@ -142,8 +151,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="재활용품인 척하는 쓰레기"
-                android:textSize="16sp"
+                android:text="재활용품인 척하는 일반쓰레기"
+                android:textColor="#686868"
+                android:textSize="15dp"
                 android:textAlignment="center"/>
 
             <!-- 재활용품인척 하는 쓰레기 품목 -->
@@ -158,6 +168,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="50dp"
                 android:textAlignment="center"
+                android:textSize="13dp"
                 android:text="영수증, 금박지, 은박지, 다른 재질이 혼합된 벽지 등" />
 
             <!-- 비고 Label -->
@@ -168,7 +179,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="비고"
-                android:textSize="16sp"
+                android:textColor="#686868"
+                android:textSize="15dp"
                 android:textAlignment="center"/>
 
             <!-- 비고 -->
@@ -184,6 +196,7 @@
                 android:layout_marginBottom="50dp"
                 android:textAlignment="textStart"
                 android:breakStrategy="high_quality"
+                android:textSize="13dp"
                 android:text="-깨진 컵은 수거할 때 사람을 다치게 할 수 있어요. 쓰레기 봉투가 찢어지지 않게 신문지 등으로 싸서 버려주세요.\n-불연성 쓰레기 봉투는 지역 내 마트, 주민센터, 철물점 등에서 살 수 있어요. 하지만 안파는 곳도 많으니 판매여부를 미리 확인하고 방문하세요.\n-불연성 쓰레기 봉투는 해당 지자체에 따라 불연재 쓰레기 봉투, 생활 폐기물 봉투, 특수 종량제 봉투 등으로 이름이 조금씩 다를 수 있어요. 모두 타지 않는 쓰레기를 담는 종량제 봉투라는 것과 마대 재질로 만들어졌다는 것을 기억해주세요." />
 
             <!--마지막 가이드 라인-->
@@ -197,6 +210,7 @@
                 android:paddingRight="15dp"
                 android:gravity="center"
                 android:text="@string/separate_guide"
+                android:textColor="#7E80A8"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
@@ -209,6 +223,7 @@
                 android:layout_height="53dp"
                 android:layout_gravity="center"
                 android:text="완료"
+
                 android:backgroundTint="#3F3F3F"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
