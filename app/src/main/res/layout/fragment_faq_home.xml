@@ -33,6 +33,8 @@
                     android:textColor="#000000"
                     android:textSize="18sp"
                     android:focusable="true"
+                    android:maxLines="1"
+                    android:inputType="text"
                     android:focusableInTouchMode="true"/>
             </LinearLayout>
 

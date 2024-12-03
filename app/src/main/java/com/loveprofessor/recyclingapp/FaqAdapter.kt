@@ -1,5 +1,6 @@
 package com.loveprofessor.recyclingapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,13 @@ class FaqAdapter(var listData: ArrayList<FaqListData>) : RecyclerView.Adapter<Fa
 
     override fun getItemCount(): Int {
         return listData.size
+    }
+
+    fun setItems(list: ArrayList<FaqListData>) {
+        listData.clear()
+        listData.addAll(list)
+        Log.d("FaqAdapter", "New data set, list size: ${listData.size}")
+        notifyDataSetChanged()  // 데이터가 변경된 후 리사이클러뷰 갱신
     }
 
     inner class Holder(val binding: FaqRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
