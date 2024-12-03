@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_CameraHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -32,36 +33,93 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <!--이 이미지뷰는 예시사진 박아두는 거로 하는게 어떨지-->
+
+    <ImageView
+        android:id="@+id/search_ex_ok"
+        android:layout_width="280dp"
+        android:layout_height="313dp"
+        android:rotation="-90"
+        app:srcCompat="@drawable/pet_ok"
+        tools:layout_editor_absoluteX="-18dp"
+        tools:layout_editor_absoluteY="137dp" />
+
+    <ImageView
+        android:id="@+id/search_ex_not1"
+        android:layout_width="262dp"
+        android:layout_height="187dp"
+        app:srcCompat="@drawable/pet_not2"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="246dp" />
+
+    <ImageView
+        android:id="@+id/search_ex_not2"
+        android:layout_width="167dp"
+        android:layout_height="128dp"
+        app:srcCompat="@drawable/pet_not1"
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="153dp" />
 
     <TextView
-        android:id="@+id/recycleImageView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="52dp"
-        android:scaleType="centerCrop"
-        android:text="사진을 정면에서 찍어주세요.\n올바른 분리배출을 위한 정확한 정보를 제공합니다."
-        android:textColor="#666666"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:contentDescription="재활용품 사진"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:id="@+id/search_ex_ok_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="32dp"
+        android:text="O"
+        android:textColor="#8BC34A"
+        android:textSize="80dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/search_ex_not_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:text="X"
+        android:textColor="#FF0000"
+        android:textSize="80dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.695"
+        app:layout_constraintStart_toEndOf="@+id/search_ex_ok_text"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="정확한 인식을 위해 이렇게 촬영해주세요!\n >> 단일색 배경, 한 품목의 정면 사진"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="457dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="여러 품목의 혼합 및 일부분만 보일 경우 정확한 인식이 어렵습니다."
+        android:textSize="13dp"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="507dp" />
 
     <android.widget.Button
         android:id="@+id/buttonPhotoGraph"
         android:layout_width="325dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginTop="56dp"
-        android:text="@string/camera_photograph"
+        android:layout_marginTop="104dp"
         android:background="@drawable/back_black_radius"
+        android:text="@string/camera_photograph"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycleImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/search_ex_ok" />
 
     <android.widget.Button
         android:id="@+id/buttonSearchList"
@@ -69,13 +127,14 @@
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginBottom="36dp"
-        android:text="@string/camera_searchList"
         android:background="@drawable/back_white_radius_border"
+        android:text="@string/camera_searchList"
         android:textColor="#000000"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPhotoGraph"
-        app:layout_constraintVertical_bias="0.162" />
+        app:layout_constraintVertical_bias="0.333" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
