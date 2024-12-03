@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.loveprofessor.recyclingapp.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_home_name"
         tools:layout="@layout/fragment_home">
 
         <!--Home -> Camera로 이동-->
