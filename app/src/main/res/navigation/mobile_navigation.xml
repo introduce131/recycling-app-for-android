@@ -84,7 +84,7 @@
     <fragment
         android:id="@+id/nav_report_home"
         android:name="com.loveprofessor.recyclingapp.report.ReportHomeFragment"
-        android:label="@string/menu_report_home"
+        android:label="@string/menu_report"
         tools:layout="@layout/fragment_report_home" />
 
     <!--FAQ-->
@@ -103,7 +103,7 @@
     <fragment
         android:id="@+id/nav_Faq_home"
         android:name="com.loveprofessor.recyclingapp.faq.FaqHomeFragment"
-        android:label="@string/menu_faq_home"
+        android:label="@string/menu_faq"
         tools:layout="@layout/fragment_faq_home" />
 
     <!--찾기-->
