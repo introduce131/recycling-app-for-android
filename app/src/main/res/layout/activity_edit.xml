@@ -8,6 +8,7 @@
     android:layout_marginTop="50dp"
     tools:context=".Edit">
 
+<!-- 수정 화면 -->
 <TextView
 android:id="@+id/textname"
 android:layout_width="0dp"
@@ -23,6 +24,7 @@ app:layout_constraintTop_toTopOf="parent"
 app:layout_constraintVertical_bias="0.1"
 app:layout_constraintWidth_percent="0.8" />
 
+    <!--  android:id="@+id/editTextNickName" -->
 <EditText
 android:id="@+id/editNickName"
 android:layout_width="0dp"
@@ -40,6 +42,7 @@ app:layout_constraintStart_toStartOf="parent"
 app:layout_constraintTop_toBottomOf="@+id/textname"
 app:layout_constraintWidth_percent="0.8" />
 
+<!-- android:id="@+id/textGuideSub" -->
 <TextView
 android:id="@+id/textGS"
 android:layout_width="0dp"
@@ -49,6 +52,7 @@ app:layout_constraintEnd_toEndOf="parent"
 app:layout_constraintStart_toStartOf="parent"
 app:layout_constraintTop_toBottomOf="@+id/editNickName"
 app:layout_constraintWidth_percent="0.8" />
+
 
 <TextView
 android:id="@+id/text"
@@ -66,6 +70,7 @@ app:layout_constraintTop_toBottomOf="@+id/textGS"
 app:layout_constraintVertical_bias="0.02"
 app:layout_constraintWidth_percent="0.8" />
 
+    <!-- android:id="@+id/spinner" -->
 <Spinner
 android:id="@+id/spinner2"
 android:layout_width="0dp"
@@ -105,49 +110,49 @@ app:layout_constraintEnd_toEndOf="parent"
 app:layout_constraintStart_toStartOf="parent"
 app:layout_constraintTop_toBottomOf="@+id/text2"
 app:layout_constraintWidth_percent="0.8">
-
+<!-- android:id="@+id/checkBoxMon -->
 <CheckBox
     android:id="@+id/checkBMon"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="월요일"
     android:textSize="16sp" />
-
+    <!-- android:id="@+id/checkBoxTue -->
 <CheckBox
     android:id="@+id/checkBTue"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="화요일"
     android:textSize="16sp" />
-
+    <!-- android:id="@+id/checkBoxWed -->
 <CheckBox
     android:id="@+id/checkBWed"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="수요일"
     android:textSize="16sp" />
-
+    <!-- android:id="@+id/checkBoxThu -->
 <CheckBox
     android:id="@+id/checkBThu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="목요일"
     android:textSize="16sp" />
-
+    <!-- android:id="@+id/checkBoxFri -->
 <CheckBox
     android:id="@+id/checkBFri"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="금요일"
     android:textSize="16sp" />
-
+    <!-- android:id="@+id/checkBoxMSat -->
 <CheckBox
     android:id="@+id/checkBSat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="토요일"
     android:textSize="16sp" />
-
+    <!-- android:id="@+id/checkBoxSun -->
 <CheckBox
     android:id="@+id/checkBSun"
     android:layout_width="match_parent"

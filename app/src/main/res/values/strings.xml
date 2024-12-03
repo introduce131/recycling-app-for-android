@@ -9,7 +9,7 @@
 
     <string name="client_id">25057406424-ch45tjcqq3d3odg9640s9p53qak1n451.apps.googleusercontent.com</string>
 
-    <string name="menu_home">ECOBIN</string>
+    <string name="menu_home">홈</string>
     <string name="menu_camera">검색</string>
     <string name="menu_report">환경리포트</string>
     <string name="menu_faq">FAQ</string>
