@@ -42,7 +42,7 @@ class CameraHomeFragment : Fragment() {
 
         buttonPhotoGraph = binding.buttonPhotoGraph
         buttonSearchList = binding.buttonSearchList
-        recycleImageView = binding.recycleImageView
+        //recycleImageView = binding.recycleImageView
 
         // 카메라로 사진을 촬영한다.
         // 스스로 권한을 체크해서 카메라 권한을 가지고 있다면(GRANTED) 사진을 촬영하여 ImageView에 비트맵 형식으로 사진을 띄워서 미리 보여주고
