@@ -310,7 +310,7 @@
                         android:id="@+id/menu_icon4"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/ic_explore"
+                        android:src="@drawable/ic_menu_explore"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.92"

@@ -6,6 +6,7 @@
     android:background="#3AA676">
 
     <!-- 수직 레이아웃: 텍스트뷰들을 배치 -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,8 +45,8 @@
             android:text="재활용 버리는 요일 : 월, 금"
             android:textSize="15dp"
             android:textColor="#FFFFFF" />
-    </LinearLayout>
 
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -53,9 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|top"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/profile_icon"
+        android:background="@android:color/transparent"
         android:contentDescription="프로필 아이콘"
-        android:background="@android:color/transparent" />
+        app:srcCompat="@drawable/profile_fix" />
 
 
 </FrameLayout>
