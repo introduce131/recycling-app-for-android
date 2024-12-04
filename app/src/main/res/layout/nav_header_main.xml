@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|top"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/profile_icon"
+
         android:contentDescription="프로필 아이콘"
         android:background="@android:color/transparent" />
 

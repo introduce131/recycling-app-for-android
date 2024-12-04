@@ -116,7 +116,19 @@
         android:id="@+id/nav_Faq_home"
         android:name="com.loveprofessor.recyclingapp.faq.FaqHomeFragment"
         android:label="@string/menu_faq_home"
-        tools:layout="@layout/fragment_faq_home" />
+        tools:layout="@layout/fragment_faq_home">
+
+        <!--Faq_home -> Faq_Answer 으로 이동-->
+        <action android:id="@+id/action_Faq_home_to_Faq_answer"
+            app:destination="@+id/nav_Faq_answer"/>
+    </fragment>
+
+    <!--FAQ answer 화면-->
+    <fragment
+        android:id="@+id/nav_Faq_answer"
+        android:name="com.loveprofessor.recyclingapp.faq.FaqAnswerFragment"
+        android:label="@string/menu_faq_answer"
+        tools:layout="@layout/fragment_faq_answer" />
 
     <!--찾기-->
     <fragment

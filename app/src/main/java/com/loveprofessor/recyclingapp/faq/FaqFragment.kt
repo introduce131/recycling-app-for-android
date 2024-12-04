@@ -28,7 +28,7 @@ class FaqFragment : Fragment() {
             .setPopEnterAnim(R.anim.anim_slide_in_from_right_fade_in)
             .build()
 
-        // Camera Fragment -> CameraHome Fragment 이동
+        // Fragment -> Fragment 이동
         findNavController().navigate(R.id.action_Faq_to_Faq_home, null, navOptions)
 
         return binding.root
