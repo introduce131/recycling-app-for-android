@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.Toast
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -51,9 +52,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // NavigationView 헤더의 뷰 설정
+        val navHeaderName: TextView = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_name)
+        val navHeaderArea: TextView = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_area)
+        val navHeaderDay: TextView = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_day)
+
+        // 헤더의 텍스트 설정
+        navHeaderName.text = MyApplication.userNickname
+        navHeaderArea.text = "거주지 : ${MyApplication.userZone}"
+        navHeaderDay.text = "재활용 요일 : ${MyApplication.userGarbageday}"
+
+        // NavigationView 헤더 클릭 시 토스트 메시지
+        binding.navView.getHeaderView(0).setOnClickListener {
+            val intent = Intent(this, EditInfoActivity::class.java)  // 이동할 액티비티 클래스 지정
+            startActivity(intent)
+        }
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
@@ -85,12 +101,13 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
     override fun onStart() {
         super.onStart()
         val filter = IntentFilter("com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED")
-        registerReceiver(stepCountReceiver, filter)  // BroadcastReceiver 등록
+        registerReceiver(stepCountReceiver, filter, Context.RECEIVER_EXPORTED)  // BroadcastReceiver 등록
     }
 
     override fun onStop() {

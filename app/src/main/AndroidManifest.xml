@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- 필요한 권한들 추가 -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
@@ -31,53 +31,52 @@
         android:theme="@style/Theme.RecyclingApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".EditInfoActivity"
+            android:exported="false" />
         <!-- StepCounterService를 위한 BroadcastReceiver 등록 -->
         <receiver
             android:name=".service.StepCounterService"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".service.MidnightAlarmReceiver" android:enabled="true" android:exported="false"/>
-
-        <!-- StepCounterService를 포그라운드 서비스로 설정 -->
+        <receiver
+            android:name=".service.MidnightAlarmReceiver"
+            android:enabled="true"
+            android:exported="false" /> <!-- StepCounterService를 포그라운드 서비스로 설정 -->
         <service
             android:name=".service.StepCounterService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:foregroundServiceType="dataSync"
             android:enabled="true"
-            android:exported="false">
-        </service>
-
-        <!-- 활동들 설정 -->
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            android:permission="android.permission.BIND_JOB_SERVICE"></service> <!-- 활동들 설정 -->
         <activity
             android:name=".InputActivity"
             android:exported="false"
             android:theme="@style/Theme.RecyclingApp.NoActionBar" />
-
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.RecyclingApp.NoActionBar" />
-
-        <!-- 로그인 화면을 위한 설정 (앱 시작 화면) -->
+            android:theme="@style/Theme.RecyclingApp.NoActionBar" /> <!-- 로그인 화면을 위한 설정 (앱 시작 화면) -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.RecyclingApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.kakao.vectormap.KAKAO_MAP_KEY"
-                   android:value="KAKAO_MAP_KEY"/>
-        <meta-data android:name="com.kakao.sdk.AppKey"
-                   android:value="KAKAO_MAP_KEY"/>
+        <meta-data
+            android:name="com.kakao.vectormap.KAKAO_MAP_KEY"
+            android:value="KAKAO_MAP_KEY" />
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="KAKAO_MAP_KEY" />
     </application>
 
 </manifest>

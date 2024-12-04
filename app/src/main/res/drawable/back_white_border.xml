@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 배경 레이어 -->
+    <item>
+        <shape>
+            <solid android:color="#FFFFFF" /> <!-- 배경 색상 -->
+        </shape>
+    </item>
+
+    <!-- 아래쪽 테두리 레이어 -->
+    <item android:bottom="0dp">
+        <shape>
+            <stroke
+                android:width="2dp"
+            android:color="#D8D8D8" /> <!-- 테두리 색상 -->
+        </shape>
+    </item>
+</layer-list>

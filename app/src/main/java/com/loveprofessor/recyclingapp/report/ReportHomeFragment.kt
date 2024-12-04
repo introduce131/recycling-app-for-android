@@ -37,6 +37,7 @@ class ReportHomeFragment : Fragment() {
     private lateinit var textViewReportIntro: TextView
     private lateinit var stepCountTextView: TextView
     private lateinit var todayCarbonTextView: TextView
+    private lateinit var textViewAvgSteps: TextView
     private lateinit var barChart: BarChart
     private lateinit var dateText: TextView
     private lateinit var buttonPrevious: ImageButton
@@ -62,12 +63,14 @@ class ReportHomeFragment : Fragment() {
         textViewReportIntro = binding.textViewReportIntro
         stepCountTextView = binding.stepCountTextView
         todayCarbonTextView = binding.todayCarbonTextView
+        textViewAvgSteps = binding.textViewAvgSteps
         buttonPrevious = binding.imageButtonPrevious
         buttonNext = binding.imageButtonNext
         dateText = binding.dateText
         barChart = binding.barChart
 
-        textViewReportIntro.text = "${MyApplication.userNickname}님은 일주일 동안\n하루 평균 nnn걸음 걸었어요"
+        textViewReportIntro.text = "${MyApplication.userNickname}님은 일주일 동안"
+        textViewAvgSteps.text = "평균 걸음 수"
 
         // 마커 설정
         val markerView = CustomMarkerView(requireContext(), R.layout.custom_marker)
@@ -127,7 +130,7 @@ class ReportHomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val filter = IntentFilter("com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED")
-        requireContext().registerReceiver(stepCountReceiver, filter)
+        requireContext().registerReceiver(stepCountReceiver, filter, Context.RECEIVER_EXPORTED)
     }
 
     override fun onStop() {
@@ -206,11 +209,16 @@ class ReportHomeFragment : Fragment() {
                         steps[index] = BarEntry(index.toFloat(), todayStepCountData.toFloat())
                         carbons[index] = BarEntry(index.toFloat(), carbonData)
                     }
-
-                    Log.d("jwbaek", "3 : $list")
                 }
 
-                // 데이터 정렬, 요일 별로 다시 정렬을 한다고 보면 됨.
+                /** 4. 평균 걸음 수 계산 (steps의 y 값들의 평균 구하기)
+                 * https://echung93.tistory.com/entry/Kotlin-sumOf-%ED%95%A8%EC%88%98%EB%A5%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90 **/
+                val totalSteps = steps.sumOf { it.y.toDouble() }  // y 값들의 합 계산
+                val averageSteps = totalSteps / steps.size
+
+                textViewAvgSteps.text = "${String.format("%.0f", averageSteps)}걸음"  // 이번주 걸음수를 업데이트함
+
+                // 데이터 정렬, 요일 별로 다시 정렬을 한다고 보면 됨. x값이 순서면서 요일이라서
                 steps.sortBy { it.x }
                 carbons.sortBy { it.x }
 

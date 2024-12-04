@@ -34,7 +34,7 @@
 
     <string name="client_id">25057406424-ch45tjcqq3d3odg9640s9p53qak1n451.apps.googleusercontent.com</string>
 
-    <string name="input_nickname_guide">[어플명] 에서 사용할\n닉네임을 입력해주세요.</string>
+    <string name="input_nickname_guide">ECOBIN에서 사용할\n닉네임을 입력해주세요.</string>
     <string name="input_zone_guide">거주하고 있는\n지역구를 선택해주세요.</string>
     <string name="input_day_guide">재활용 쓰레기를\n버리는 요일을 선택해주세요.</string>
     <string name="finish_guide">가입이 완료되었습니다!</string>

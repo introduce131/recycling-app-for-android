@@ -29,7 +29,6 @@ import java.nio.ByteOrder
 
 class CameraHomeFragment : Fragment() {
     private lateinit var binding: FragmentCameraHomeBinding
-    private lateinit var recycleImageView: ImageView
     private lateinit var buttonPhotoGraph: Button
     private lateinit var buttonSearchList: Button
     private lateinit var resultCategory: String
@@ -42,7 +41,6 @@ class CameraHomeFragment : Fragment() {
 
         buttonPhotoGraph = binding.buttonPhotoGraph
         buttonSearchList = binding.buttonSearchList
-        recycleImageView = binding.recycleImageView
 
         // 카메라로 사진을 촬영한다.
         // 스스로 권한을 체크해서 카메라 권한을 가지고 있다면(GRANTED) 사진을 촬영하여 ImageView에 비트맵 형식으로 사진을 띄워서 미리 보여주고
@@ -72,7 +70,6 @@ class CameraHomeFragment : Fragment() {
     // launch camera 랑 사진 찍기
     private val takePicturePreview = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {bitmap->
         if(bitmap != null) {
-            recycleImageView.setImageBitmap(bitmap) // 이미지뷰에 이미지를 띄워줌
             outputGenerator(bitmap)                 // 모델을 사용할거고 입력값에 Bitmap 이미지를 넣음
 
             // 백스택 버튼 클릭 시, nav_camera_home(홈 화면) 으로 '다시 되돌아간다' 라고 생각하자

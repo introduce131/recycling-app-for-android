@@ -86,6 +86,7 @@ class StepCounterService : Service() {
                 midnightAlarm()  // 권한이 있으면 자정에 알람을 설정
             } else {
                 val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)  // 권한이 없으면 시스템 설정 화면으로 이동
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             }
         } else {
@@ -185,4 +186,3 @@ class StepCounterService : Service() {
         sensorManager.unregisterListener(stepCounterListener)
     }
 }
-
