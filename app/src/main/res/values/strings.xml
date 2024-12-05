@@ -1,28 +1,23 @@
 <resources>
-    <string name="app_name">RecyclingApp</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="app_name">ECOBIN</string>
 
     <string name="action_logout">로그아웃</string>
     <string name="action_exit">앱 종료하기</string>
     <string name="action_image_report">검색결과 오류신고</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_camera">Camera</string>
-    <string name="menu_report">Report</string>
+    <string name="menu_camera">검색</string>
+    <string name="menu_report">환경리포트</string>
     <string name="menu_faq">FAQ</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_camera_home">Camera Home</string>
-    <string name="menu_camera_result">Camera Result</string>
-    <string name="menu_camera_report">Camera Report</string>
-    <string name="menu_camera_list">Camera List</string>
-    <string name="menu_report_home">Report Home</string>
-    <string name="menu_faq_home">FAQ Home</string>
-    <string name="menu_faq_answer">FAQ Answer</string>
-    <string name="menu_search_home">Search Home</string>
+    <string name="menu_search">찾기</string>
+    <string name="menu_camera_home">재활용 방법 찾기</string>
+    <string name="menu_camera_result">재활용 분류 결과</string>
+    <string name="menu_camera_report">검색결과 오류신고</string>
+    <string name="menu_camera_list">검색 목록</string>
+    <string name="menu_report_home">환경 리포트</string>
+    <string name="menu_faq_home">FAQ (자주 묻는 질문)</string>
+    <string name="menu_faq_answer">FAQ (자주 묻는 질문)</string>
+    <string name="menu_search_home">찾기</string>
 
     <string name="mon">월요일</string>
     <string name="tue">화요일</string>
@@ -64,7 +59,4 @@
     <string name="search_category_receipt">전자 영수증</string>
     <string name="search_category_tumbler">텀블러·다회용컵</string>
     <string name="search_category_eco_item">친환경 상품</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -2,13 +2,16 @@ package com.loveprofessor.recyclingapp.search
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -45,6 +48,7 @@ interface FirebaseCallback {
 class SearchHomeFragment : Fragment() {
     private lateinit var binding: FragmentSearchHomeBinding
     private lateinit var mapView: MapView
+    private lateinit var explainText: TextView
     private var kakaoMap: KakaoMap? = null
     private val client = OkHttpClient()
 
@@ -67,6 +71,13 @@ class SearchHomeFragment : Fragment() {
     ): View? {
         binding = FragmentSearchHomeBinding.inflate(inflater, container, false)
         locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        explainText = binding.pointExplainLink
+
+        // 탄소중립포인트 페이지로 이동
+        explainText.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://cpoint.or.kr/netzero/main.do"))
+            startActivity(intent)
+        }
 
         // 위치 권한 요청
         checkLocationPermission()
@@ -221,7 +232,6 @@ class SearchHomeFragment : Fragment() {
 
     // showMapView에서 데이터 가공 후 searchLocation() 함수로 이동해서 데이터를 뿌려줄거임
     // 앞에서 데이터 가져오는 부분 빼고 kakaoMap에서는 여기가 제일 먼저 시작되는 부분이라고 생각해도 됨.
-
     private val labelMap = mutableMapOf<String, LabelData>()
     private fun showMapView(dataArray: JSONArray, categoryName:String) {
         Log.d("KakaoMap", "0. 초기화 후 전자영수증 : $dataArray")  // 정상적으로 호출되는지 로그 확인
@@ -279,6 +289,11 @@ class SearchHomeFragment : Fragment() {
                             val place = documents.getJSONObject(i)
                             val lat = place.getString("y").toDouble() // 위도
                             val lng = place.getString("x").toDouble() // 경도
+
+                            // "주차장" 또는 "ATM"이 포함되어 있으면 필터링
+                            if (place.getString("place_name").contains("주차장") || place.getString("place_name").contains("ATM")) {
+                                continue  // 이 장소는 제외
+                            }
 
                             Log.d("3-1. 전체 지점 object : ","$place")
                             Log.d("3-2. 전체 지점 정보: ", "head place: ${place.getString("place_name")}, x: $lat, y: $lng")

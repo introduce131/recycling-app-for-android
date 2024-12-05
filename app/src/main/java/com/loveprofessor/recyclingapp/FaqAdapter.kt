@@ -24,7 +24,6 @@ class FaqAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.qText.text = "Q."
         holder.question.text = listData[position].list_question
-        holder.nextButton.setImageResource(R.drawable.ic_button_next)
 
         // 아이템 클릭 리스너 설정
         holder.itemView.setOnClickListener {
@@ -46,6 +45,5 @@ class FaqAdapter(
     inner class Holder(val binding: FaqRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val qText = binding.rvQText
         val question = binding.rvQuestion
-        val nextButton = binding.rvNextButton
     }
 }

@@ -1,5 +1,6 @@
 package com.loveprofessor.recyclingapp.faq
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,11 +9,13 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.firebase.firestore.FirebaseFirestore
 import com.loveprofessor.recyclingapp.FaqAdapter
 import com.loveprofessor.recyclingapp.FaqListData
@@ -89,7 +92,19 @@ class FaqHomeFragment : Fragment(), FaqAdapter.OnItemClickListener {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        // 화면 아무데나 누르면 키보드 내려감
+        binding.root.setOnClickListener{
+            hideKeyboard()
+            false
+        }
+
         return binding.root
+    }
+    private fun hideKeyboard() {
+        activity?.currentFocus?.let { focusView ->
+            val inputManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            inputManager?.hideSoftInputFromWindow(focusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
     }
 
     override fun onItemClick(view: View, position: Int) {

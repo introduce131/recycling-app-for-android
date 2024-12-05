@@ -22,10 +22,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="36dp"
                 android:text="분류 결과"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewCategory"
@@ -37,10 +34,7 @@
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:textStyle="bold"
-                android:breakStrategy="balanced"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                android:breakStrategy="balanced" />
 
             <ImageView
                 android:id="@+id/recycleImageView"
@@ -51,10 +45,7 @@
                 android:layout_marginBottom="20dp"
                 android:scaleType="centerCrop"
                 android:background="#F7CBFF"
-                android:contentDescription="재활용품 사진"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCategory" />
+                android:contentDescription="재활용품 사진" />
 
             <!-- 배출 방법 Label -->
             <TextView
@@ -197,26 +188,18 @@
                 android:paddingRight="15dp"
                 android:gravity="center"
                 android:text="@string/separate_guide"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.503"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycleImageView" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonOK"
-                android:layout_width="303dp"
-                android:layout_height="53dp"
+                android:layout_width="325dp"
+                android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:text="완료"
-                android:backgroundTint="#3F3F3F"
+                android:background="@drawable/back_black_radius"
+                android:textColor="#FFFFFF"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5"
-                app:layout_constraintVertical_bias="0.245" />
+                android:layout_marginBottom="20dp" />
 
         </LinearLayout>
     </ScrollView>

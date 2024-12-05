@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.Toast
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     // BroadcastReceiver 등록하여 걸음 수를 실시간으로 받기
     private val stepCountReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
+        override fun onReceive(context: Context, intent:    Intent) {
             if (intent.action == "com.loveprofessor.recyclingapp.STEP_COUNT_UPDATED") {
                 val stepCount = intent.getIntExtra("step_count", 0)
                 val todayStepCount = intent.getIntExtra("today_step_count", 0)
@@ -47,23 +49,43 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 권한 요청 코드
-    private val REQUEST_CODE_PERMISSION = 100
+    companion object {
+        const val REQUEST_CODE_ACTIVITY_RECOGNITION = 100
+        const val REQUEST_CODE_POST_NOTIFICATIONS = 101
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 매 로그인 시 uId에 로그인 성공시에 가져온 uId 값을 저장함, 로그아웃할 때, remove할 예정
+        val prefs = this.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        prefs.edit().putString("uId", MyApplication.uId).apply()
+
+        Log.d("jwbaek", "main uid : ${MyApplication.uId}")
+
         // NavigationView 헤더의 뷰 설정
         val navHeaderName: TextView = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_name)
         val navHeaderArea: TextView = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_area)
         val navHeaderDay: TextView = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_day)
 
+        val userGarbageday = MyApplication.userGarbageday
+
+        // 각 요일을 축약한 값으로 변환 "목요일" -> "목"
+        val convertDays = userGarbageday
+            .replace("월요일", "월")
+            .replace("화요일", "화")
+            .replace("수요일", "수")
+            .replace("목요일", "목")
+            .replace("금요일", "금")
+            .replace("토요일", "토")
+            .replace("일요일", "일")
+
         // 헤더의 텍스트 설정
         navHeaderName.text = MyApplication.userNickname
         navHeaderArea.text = "거주지 : ${MyApplication.userZone}"
-        navHeaderDay.text = "재활용 요일 : ${MyApplication.userGarbageday}"
+        navHeaderDay.text = "재활용 요일 : $convertDays"
 
         // NavigationView 헤더 클릭 시 토스트 메시지
         binding.navView.getHeaderView(0).setOnClickListener {
@@ -73,21 +95,8 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        /** requestPermissions는 비동기적으로 작동해서 지금 이따구로 코드 작성하면 신체활동 권한만 입력받고, 알림 권한을 확인할 수 있는 dialog창은 안뜨는 문제가 있음 **/
-        // '활동' 권한이 부여되었는지 먼저 확인을 한다.
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
-            startStepCounterService()   // 권한이 있으면 서비스를 시작
-        } else { // 권한이 없으면 요청
-            Toast.makeText(this, "신체활동 권한이 거부되었습니다. 설정에서 관련 권한을 활성화 해주세요.", Toast.LENGTH_SHORT).show()
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), REQUEST_CODE_PERMISSION)
-        }
-
-        // '알림' 권한이 부여되었는지 확인한다. 만약 알람 권한이 꺼져있으면 다시 받으면 됨
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "알림 권한이 거부되었습니다. 설정에서 관련 권한을 활성화 해주세요.", Toast.LENGTH_SHORT).show()
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_CODE_PERMISSION)
-        }
-        /** ..여기까지 문제.. **/
+        /** 권한 입력 **/
+        requestPermissions()
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -126,16 +135,31 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    // 권한 요청 결과 처리
+    /** 권한 요청 결과 처리 **/
+    /** 참조 : https://ogyong.tistory.com/5 **/
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSION) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 권한이 승인되면 서비스 시작
-                startStepCounterService()
-            } else {
-                // 권한이 거부된 경우 사용자에게 안내
-                Toast.makeText(this, "권한이 거부되었습니다. 이 앱은 걸음 수 추적 기능을 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
+
+        when (requestCode) {
+            REQUEST_CODE_ACTIVITY_RECOGNITION -> {
+                // 신체활동 권한 결과 처리
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("Permission", "신체활동 권한이 승인되었습니다.")
+                    startStepCounterService()  // 권한이 승인되면 서비스를 시작
+                } else {
+                    Log.d("Permission", "신체활동 권한이 거부되었습니다.")
+                    Toast.makeText(this, "신체활동 권한이 필요합니다. 설정에서 활성화 해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            REQUEST_CODE_POST_NOTIFICATIONS -> {
+                // 알림 권한 결과 처리
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("Permission", "알림 권한이 승인되었습니다.")
+                } else {
+                    Log.d("Permission", "알림 권한이 거부되었습니다.")
+                    Toast.makeText(this, "알림 권한이 필요합니다. 설정에서 활성화 해주세요.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -169,7 +193,11 @@ class MainActivity : AppCompatActivity() {
                     }
                     .setConfirmClickListener {
                         MyApplication.userInfoReset()   // 로그인된 사용자 정보 초기화
-                        finish()    // 현재 액티비티 종료
+
+                        // 그리고 SharedPreferences에 있는 uId를 삭제함
+                        val prefs = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+                        prefs.edit().remove("uId").apply()
+                        finish()  // 현재 액티비티 종료
                     }
                     .show()
                 true
@@ -178,6 +206,49 @@ class MainActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
                 false
             }
+        }
+    }
+
+    // Android 13 이상에서 알림 권한 요청
+    private fun requestPermissions() {
+        val permissionsToRequest = mutableListOf<String>()
+
+        // 신체활동 권한이 없으면 추가
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.ACTIVITY_RECOGNITION)
+        }
+
+        // 알림 권한이 없으면 추가
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        // 요청할 권한이 있다면 한 번에 요청
+        if (permissionsToRequest.isNotEmpty()) {
+            requestMultiplePermissions.launch(permissionsToRequest.toTypedArray())
+        } else {
+            // 이미 모든 권한이 승인된 경우
+            startStepCounterService()
+        }
+    }
+
+    // 다중 권한 요청
+    private val requestMultiplePermissions = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        val activityRecognitionGranted = permissions[Manifest.permission.ACTIVITY_RECOGNITION] ?: false
+        val postNotificationsGranted = permissions[Manifest.permission.POST_NOTIFICATIONS] ?: false
+
+        if (activityRecognitionGranted && postNotificationsGranted) {
+            Log.d("Permission", "두 권한이 모두 승인되었습니다.")
+            startStepCounterService() // 권한이 승인되면 서비스 시작
+        } else {
+            Log.d("Permission", "필요한 권한이 거부되었습니다.")
+            Toast.makeText(this, "모든 권한을 활성화 해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -42,14 +42,5 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="제목 1"/>
-
-        <!--카테고리 (업로드 날짜)-->
-        <ImageButton
-            android:id="@+id/rv_nextButton"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_button_next"
-            android:background="@color/float_transparent" />
     </LinearLayout>
 </LinearLayout>

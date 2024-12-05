@@ -1,6 +1,7 @@
 package com.loveprofessor.recyclingapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.content.ContextCompat
@@ -82,6 +84,12 @@ class InputNicknameFragment : Fragment() {
             transaction.commit()
         }
 
+        // 화면 아무데나 누르면 키보드 내려감
+        binding.root.setOnClickListener{
+            hideKeyboard()
+            false
+        }
+
         return binding.root
     } // end of onCreateView
 
@@ -96,4 +104,13 @@ class InputNicknameFragment : Fragment() {
         // 닉네임 문자열이 정규식에 부합하는지?, matches 메서드는 Boolean을 return함
         return Regex(pattern).matches(nickName)
     }
+
+    /** https://blog.yena.io/studynote/2017/12/16/Android-HideKeyboard.html **/
+    private fun hideKeyboard() {
+        activity?.currentFocus?.let { focusView ->
+            val inputManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            inputManager?.hideSoftInputFromWindow(focusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
+    }
+
 }

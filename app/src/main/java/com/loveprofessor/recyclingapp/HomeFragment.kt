@@ -1,6 +1,7 @@
 package com.loveprofessor.recyclingapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,8 +38,6 @@ class HomeFragment : Fragment() {
 
         /* 오늘 날짜랑 쓰레기 버리는 날짜랑 비교해서 상단 텍스트에 표시할거임. */
         if(MyApplication.userGarbageday.isNotEmpty()) {
-            //var days:MutableList<String> = MyApplication.userGarbageday.split(",").toMutableList()
-            //days.add("일요일")
             var days:List<String> = MyApplication.userGarbageday.split(",")
             var today = LocalDate.now().dayOfWeek.toString()    // 오늘 날짜에 해당하는 요일을 today에 저장함 (영어)
 
@@ -47,11 +46,12 @@ class HomeFragment : Fragment() {
                 "MONDAY" to "월요일",  "TUESDAY" to "화요일",  "WEDNESDAY" to "수요일",
                 "THURSDAY" to "목요일",  "FRIDAY" to "금요일",  "SATURDAY" to "토요일",  "SUNDAY" to "일요일"
             )
-            today = daysOfKorean[today].toString()
+            today = daysOfKorean[today].toString().trim()
 
             // 이제 오늘 날짜랑 쓰레기버리는 날짜랑 비교하면 됨
             for(day in days) {
-                if(day == today) {
+                val newDay = day.trim() // 뒤에 공백제거 안해줘서 여태 동작 안했던거였음
+                if(newDay == today) {
                     introText = "${MyApplication.userNickname}님 안녕하세요!\n${today}은 재활용쓰레기\n버리는 날이에요."
                     break;      // 일치하면 loop 빠져나오기
                 }

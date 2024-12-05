@@ -11,14 +11,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/search_guide"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!--클릭시 탄중포 홈페이지 연결-->
+    <TextView
+        android:id="@+id/point_explain_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="탄소중립포인트란?"
+        android:textColor="#458948"
+        android:textStyle="bold"
+        android:autoLink="web"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCategory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearchHomeGuide"
+        app:layout_constraintVertical_bias="0.2" />
 
     <LinearLayout
         android:id="@+id/linearLayoutCategory"

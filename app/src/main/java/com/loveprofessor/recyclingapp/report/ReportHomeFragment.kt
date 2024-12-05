@@ -42,7 +42,7 @@ class ReportHomeFragment : Fragment() {
     private lateinit var dateText: TextView
     private lateinit var buttonPrevious: ImageButton
     private lateinit var buttonNext: ImageButton
-    private var baseDate: LocalDate = LocalDate.now()  // baseDate를 클래스 레벨 변수로 이동
+    private var baseDate: LocalDate = LocalDate.now()    // baseDate는 오늘 날짜
 
     private val stepCountReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {

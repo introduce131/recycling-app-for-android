@@ -1,6 +1,9 @@
 package com.loveprofessor.recyclingapp
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,6 +28,22 @@ class MyApplication:Application() { // 신기하다. Manifest.xml의 Application
             this.userNickname = ""
             this.userZone = ""
             this.userGarbageday = ""
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        // SharedPreferences 초기화 코드를 추가 (2024-12-06)
+        val prefs = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val isFirstRun = prefs.getBoolean("isFirstRun", true)
+
+        Log.d("isFirst", "$isFirstRun")
+
+        if (isFirstRun) {
+            // 앱이 처음 설치되었을 때 초기화 작업을 해줘야함, 사실 이렇게까지 해야하나 싶기도한데 이게 맞는 듯?..
+            prefs.edit().clear().apply()  // SharedPreferences 초기화
+            prefs.edit().putBoolean("isFirstRun", false).apply()  // 이후 앱 실행에서는 초기화하지 않음
         }
     }
 }

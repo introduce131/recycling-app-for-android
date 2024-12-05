@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -33,39 +34,52 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // OneTapSignIn 클라이언트 초기화
-        oneTapClient = Identity.getSignInClient(this)
+        // 로그인 상태 확인 (SharedPreferences에 저장된 uId를 기준으로 확인하면 됨)
+        val prefs: SharedPreferences = this.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val uId = prefs.getString("uId", null)
 
-        // Google 로그인 요청 설정(Token 요청 설정)
-        signInRequest = BeginSignInRequest.builder()
-            .setGoogleIdTokenRequestOptions(
-                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true) // 토큰을 요청
-                    .setServerClientId(getString(R.string.client_id))  // 웹 클라이언트 ID
-                    .setFilterByAuthorizedAccounts(false)   // false로 해야 인증되지 않은 계정도 등록할 수 있음.
-                    .build()
-            )
-            .build()
+        Log.d("jwbaek", "uid : $uId")
 
-        // 구글 로그인 버튼 클릭 이벤트
-        binding.googleLoginBtn.setOnClickListener {
+        if(uId != null) {
+            // uId가 존재하면 이미 로그인된 상태니까, 바로 MainActivity로 이동
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()    // LoginActivity는 종료시킴
+        } else {
+            // OneTapSignIn 클라이언트 초기화
+            oneTapClient = Identity.getSignInClient(this)
 
-            // OneTapSignIn의 시작
-            oneTapClient.beginSignIn(signInRequest)
-                .addOnSuccessListener(this) { result ->
-                    try {
-                        startIntentSenderForResult(
-                            result.pendingIntent.intentSender,
-                            REQ_ONE_TAP,
-                            null, 0, 0, 0, null
-                        )
-                    } catch (e: IntentSender.SendIntentException) {
-                        Log.e("Google", "One Tap UI 실행 실패 : ${e.localizedMessage}")
+            // Google 로그인 요청 설정(Token 요청 설정)
+            signInRequest = BeginSignInRequest.builder()
+                .setGoogleIdTokenRequestOptions(
+                    BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(true) // 토큰을 요청
+                        .setServerClientId(getString(R.string.client_id))  // 웹 클라이언트 ID
+                        .setFilterByAuthorizedAccounts(false)   // false로 해야 인증되지 않은 계정도 등록할 수 있음.
+                        .build()
+                )
+                .build()
+
+            // 구글 로그인 버튼 클릭 이벤트
+            binding.googleLoginBtn.setOnClickListener {
+
+                // OneTapSignIn의 시작
+                oneTapClient.beginSignIn(signInRequest)
+                    .addOnSuccessListener(this) { result ->
+                        try {
+                            startIntentSenderForResult(
+                                result.pendingIntent.intentSender,
+                                REQ_ONE_TAP,
+                                null, 0, 0, 0, null
+                            )
+                        } catch (e: IntentSender.SendIntentException) {
+                            Log.e("Google", "One Tap UI 실행 실패 : ${e.localizedMessage}")
+                        }
                     }
-                }
-                .addOnFailureListener(this) { e ->
-                    Log.e("Google", "One Tap Sign-In 실패: ${e.localizedMessage}")
-                }
+                    .addOnFailureListener(this) { e ->
+                        Log.e("Google", "One Tap Sign-In 실패: ${e.localizedMessage}")
+                    }
+            }
         }
     }
 

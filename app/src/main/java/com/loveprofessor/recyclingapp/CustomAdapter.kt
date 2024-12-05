@@ -49,7 +49,7 @@ class CustomAdapter(val listData: ArrayList<ListData>): RecyclerView.Adapter<Cus
             "plastic-bags" -> "비닐류"
             "plastic-bottle" -> "플라스틱 병류"
             "plastic-container" -> "플라스틱 용기류"
-            "plastic-disposable" -> "일회룡 식기류"
+            "plastic-disposable" -> "일회용 식기류"
             else -> "Not Found"
         }
     }

@@ -1,8 +1,11 @@
 package com.loveprofessor.recyclingapp
 
 import android.R
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
@@ -14,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.firebase.firestore.FirebaseFirestore
 import com.loveprofessor.recyclingapp.camera.ClassifyResultData
 import com.loveprofessor.recyclingapp.databinding.ActivityEditInfoBinding
@@ -36,6 +40,8 @@ class EditInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
 
         checkBMon = binding.checkBMon
         checkBTue = binding.checkBTue
@@ -73,6 +79,11 @@ class EditInfoActivity : AppCompatActivity() {
         buttonComp.setOnClickListener {
             updateUser()
         }
+
+        binding.root.setOnClickListener {
+            hideKeyboard()
+            false
+        }
     }
 
     private fun updateUser() {
@@ -106,20 +117,49 @@ class EditInfoActivity : AppCompatActivity() {
             .addOnSuccessListener { querySnapshot ->
                 if(querySnapshot.isEmpty) {
                     Log.d("jwbaek", "uid : $userUid")
-                    Toast.makeText(this, "유저를 찾을 수 없습니다.", Toast.LENGTH_LONG).show()
+                    SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setContentText("유저를 찾을 수 없습니다!")
+                        .setConfirmText("확인")
+                        .setConfirmClickListener { dialog ->
+                            dialog.dismiss()
+                        }
+                        .show()
                 } else {
                     val document = querySnapshot.documents[0]
-
-                    Log.d("jwbaek", "document id : ${document.id}")
-
                     collectionRef.document(document.id)
                         .update(userUpdates)
                         .addOnSuccessListener {
-                            Toast.makeText(this, "정상적으로 업데이트 되었습니다.", Toast.LENGTH_LONG).show()
-                            finish()
+                            // 1. Firestore 업데이트 성공 후 MyApplication에 먼저 값을 저장하고,
+                            MyApplication.userNickname = nickName
+                            MyApplication.userZone = zone
+                            MyApplication.userGarbageday = selectedDaysString
+
+                            // 2. SweetAlertDialog로 성공 메시지를 표시한다.
+                            SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setContentText("정상적으로 업데이트 되었습니다!")
+                                .setConfirmText("확인")
+                                .setConfirmClickListener { dialog ->
+                                    dialog.dismiss()
+                                    // onCreate()를 다시 호출해야 되서, 그냥 MainActivity를 새로 시작하는 방향으로 하는게 나을 듯 하다.
+                                    val intent = Intent(this, MainActivity::class.java)
+
+                                    // 새로운 태스크에서 MainActivity를 시작하도록 설정
+                                    /* 출처 : https://blog.naver.com/estern/220012629594 */
+                                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                    finish() // 그리고 현재 화면을 종료시킴.
+                                }
+                                .show()
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(this, "업데이트에 실패했습니다 : ${e.message}", Toast.LENGTH_LONG).show()
+                            SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                                .setContentText("업데이트에 실패했습니다.")
+                                .setConfirmText("확인")
+                                .setConfirmClickListener { dialog ->
+                                    dialog.dismiss()
+                                    Log.d("EditInfo", "${e.message}")
+                                }
+                                .show()
                         }
                 }
             }
@@ -144,6 +184,13 @@ class EditInfoActivity : AppCompatActivity() {
                 "토요일" -> checkBSat.isChecked = true
                 "일요일" -> checkBSun.isChecked = true
             }
+        }
+    }
+
+    private fun hideKeyboard() {
+        this.currentFocus?.let { focusView ->
+            val inputManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            inputManager?.hideSoftInputFromWindow(focusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
     }
 }
