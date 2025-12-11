@@ -1,24 +1,107 @@
-# Recyling-app-for-android 
+<div align="center">
+<img width="256" height="256" alt="ic_launcher-playstore" src="https://github.com/user-attachments/assets/76836ce5-7d12-4eea-adc8-6f6362c6638d" />
+</div>
 
-## 테스트 방법
-1. 먼저 코드를 develop 브랜치로 내려받는다 (git clone)
-3. 그리고 firebase 프로젝트에 들어간다
-4. `프로젝트 설정`에 들어가서 `google-services.json` 파일을 내려받는다
-5. 내려받은 프로젝트를 안드로이드 스튜디오로 실행시켜준다.
-6. 프로젝트의 구조를 `Android`에서 `Project`로 이동 후 내려받은 `google-services.json` 파일을 `app` 폴더에 옮겨넣는다
-7. `strings.xml` 파일에 `client_id` 를 하나 추가한다
-   ```
-   <string name="client_id">여기</string>
-   ```
-8. Sync를 일단 한다
-9. Build > Clean Project를 한다
-10. Build > Rebuild Project를 한다
-11. Github Projects에 들어가서 local.properties를 열고 내용을 복사하여 다운로드 받은 안드로이드 프로젝트 안에 있는 local.properties에 붙여넣기 한다.
-12. 다시 sync를 하고, 에뮬레이터에서는 오류가 나니 안드로이드 기기를 직접 연결하여 실행한다.
-13. 에러 나면 카톡으로 물어보세요.
-14. 일단 기능은 거의 다 하긴했는데 지금 안되는 기능 목록
-   - 처음에 앱을 설치하고 `환경 리포트`화면에 들어가면 오늘의 걸음수가 꽤 높게 찍히는 경우가 있을 수도 있음. (12-05 저녁에 해결 예정)
-   - 처음에 한번에 권한을 입력받으려고 하는데 지금 비동기적으로 처리되고 있어서 앱을 여러번 껐다 켜서 권한 dialog를 통해서 권한을 활성화 해야함.
-   - 그리고 Login 화면 좀 수정해야되고, 가능하면 표현식도 만져야됨
-   - 그리고 매번 로그인하기가 번거로워서 쿠키같이 저장했다가 사용자가 들어왔을 때 사용자 ID가 유효하다면 로그인화면 건너뛰고 메인화면 바로 띄우는 기능 추가 할 예정
-   - 그 외에 버그 발견하면 말해주세요
+<br><br>
+
+
+# ♻️ ECOBIN
+
+- ECOBIN은 환경 보호를 위한 올바른 재활용 방법을 안내합니다.<br>
+- 자원을 올바르게 분리배출 하는 방법을 제공하고, 현재 내 위치 근처의 탄소중립포인트 사용처 정보를 제공하고<br>
+- 실시간으로 걸음 수에 비례한 탄소저감량을 표시함으로써 재활용 활동을 더욱 편리하고 효과적으로 만들고자 하는 목적을 가진 애플리케이션입니다.
+
+---
+
+## Tech Stack
+
+[![kotlin](https://img.shields.io/badge/kotlin-7F52FF?logo=kotlin&logoColor=white&style=flat-square)](https://kotlinlang.org)
+[![android](https://img.shields.io/badge/android-3DDC84?logo=android&logoColor=white&style=flat-square)](https://developer.android.com)
+[![firebase](https://img.shields.io/badge/firebase-FFCA28?logo=firebase&logoColor=black&style=flat-square)](https://firebase.google.com)
+[![python](https://img.shields.io/badge/python-3776AB?logo=python&logoColor=white&style=flat-square)](https://www.python.org)
+
+<br><br>
+
+## 시작, 로그인 화면
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/2a98904a-d58e-46d8-96d8-4a7c1caa3a7b" />
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/85ecd39a-ab82-460b-8e20-1d7c3fe944a8" />
+</div>
+
+<br>
+
+# 메인 화면
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/18f19e06-73eb-4deb-9d08-72a15cf6c9f9" />
+
+</div>
+
+<br>
+
+# 검색(재활용품 촬영)
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/c38a3ce2-51db-4595-98d2-68199c7d4c7c" />
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/15f6fc61-fffd-4726-aee0-f6696b67d648" />
+</div>
+
+<br>
+
+# 검색 목록
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/beeab1ad-42b6-45c7-a97b-17e23e235acb" />
+</div>
+
+<br>
+
+# 검색 결과 오류 신고
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/e76a3e57-c6c6-45d9-bf2a-58697e42ed3b" />
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/80e6b625-3d45-497d-a3de-206ec87b63dc" />
+</div>
+
+<br>
+
+# 환경리포트
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/5c6d83ea-8015-47a5-81b5-4b06a64483d0" />
+</div>
+
+<br>
+
+# FAQ
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/68a9f625-53e5-4b32-bac5-82748eabbc52" />
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/8a2c3608-da4c-421b-8fe5-08fee2f0e940" />
+</div>
+
+<br>
+
+# 찾기(내 주변 탄소중립포인트 확인처) 
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/b6cbf073-f079-47ed-a286-c1c718014ab5" />
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/ee425dca-cb43-4c1e-b7e4-c5190e91a163" />
+</div>
+
+<br>
+
+# 사이드 바
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/3506213e-b3c3-40b8-a437-eb8b31c5c753" />
+</div>
+
+<br>
+
+# 설정 화면
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/60363d9d-98e0-4d7a-95e6-76df53a4db56" />
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/11d7c1e9-c174-497e-99f7-a6bd14928a5a" />
+</div>
+
+<br>
+
+# 회원가입 화면
+<div align="center">
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/12923011-d04b-45b0-9d3b-b180cdfddd17" />
+   <img width="250" height="650" alt="image" src="https://github.com/user-attachments/assets/8af3b9bc-5e8c-419a-ade0-a099d691aa12" />
+</div>
+
